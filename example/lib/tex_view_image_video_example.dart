@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewImageVideoExample extends StatelessWidget {
-  final TeXViewRenderingEngine renderingEngine;
-
-  const TeXViewImageVideoExample(
-      {super.key, this.renderingEngine = const TeXViewRenderingEngine.katex()});
+  const TeXViewImageVideoExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +11,6 @@ class TeXViewImageVideoExample extends StatelessWidget {
         title: const Text("TeXView Image & Video"),
       ),
       body: TeXView(
-          renderingEngine: renderingEngine,
           child: const TeXViewColumn(children: [
             TeXViewDocument(
                 r"""<h2>Flutter \( \rm\\TeX \) Image Example</h2>""",
