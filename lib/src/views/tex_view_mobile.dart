@@ -14,7 +14,7 @@ class TeXViewState extends State<TeXView> {
     TeXRederingServer.onTeXViewRenderedCallback =
         (teXViewRenderedCallbackMessage) async {
       double newHeight = double.parse(teXViewRenderedCallbackMessage);
-      if (_currentHeight != newHeight) {
+      if (_currentHeight != newHeight && mounted) {
         setState(() {
           _currentHeight = newHeight;
         });
