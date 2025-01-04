@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/src/models/rendering_engine.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
+
+
+/// A rendering server for TeXView. This is backed by a [LocalhostServer] and a [WebViewControllerPlus].
+/// Make sure to call [run] before using the [controller].
 class TeXRederingServer {
   static RenderingEngineCallback? onPageFinished,
       onTapCallback,
@@ -13,10 +17,10 @@ class TeXRederingServer {
   static TeXViewRenderingEngine renderingEngine =
       const TeXViewRenderingEngine.mathjax();
 
-  static LocalhostServer localhostServer = LocalhostServer();
+  static LocalhostServer server = LocalhostServer();
 
   static Future<void> run({int port = 0}) async {
-    await localhostServer.start(port: port);
+    await server.start(port: port);
   }
 
   static Future<void> initController() async {
@@ -27,7 +31,7 @@ class TeXRederingServer {
       ..setBackgroundColor(Colors.transparent)
       ..loadFlutterAssetWithServer(
           "packages/flutter_tex/js/${renderingEngine.name}/index.html",
-          localhostServer.port!)
+          server.port!)
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (String url) {
@@ -45,23 +49,21 @@ class TeXRederingServer {
       )
       ..addJavaScriptChannel(
         'OnTapCallback',
-        onMessageReceived: (onTapCallbackMessage) {
-          onTapCallback?.call(onTapCallbackMessage.message);
-        },
+        onMessageReceived: (onTapCallbackMessage) =>
+            onTapCallback?.call(onTapCallbackMessage.message),
       )
       ..addJavaScriptChannel(
         'TeXViewRenderedCallback',
-        onMessageReceived: (teXViewRenderedCallbackMessage) {
-          onTeXViewRenderedCallback
-              ?.call(teXViewRenderedCallbackMessage.message);
-        },
+        onMessageReceived: (teXViewRenderedCallbackMessage) =>
+            onTeXViewRenderedCallback
+                ?.call(teXViewRenderedCallbackMessage.message),
       );
 
     return controllerCompleter.future;
   }
 
   static Future<void> stop() async {
-    await localhostServer.close();
+    await server.close();
   }
 }
 

@@ -11,10 +11,11 @@
 - [Demo Video](#demo-video)
   - [Click to Watch Demo on Youtube](#click-to-watch-demo-on-youtube)
 - [Screenshots](#screenshots)
-- [How to use?](#how-to-use)
+- [How to setup?](#how-to-setup)
     - [Android](#android)
     - [iOS](#ios)
     - [Web](#web)
+- [How to use?](#how-to-use)
 - [Examples](#examples)
     - [Quick Example](#quick-example)
     - [TeXView Document Example](#texview-document-example)
@@ -35,7 +36,7 @@
 - [Web Demo.](#web-demo)
 - [Api Changes.](#api-changes)
 - [Api Usage.](#api-usage)
-- [Cautions:](#cautions)
+- [Limitations:](#limitations)
 
 # About
 A Flutter Package to render **fully offline** so many types of equations and expressions based on **LaTeX** , **TeX** and **MathML**, most commonly used are as followings:
@@ -70,12 +71,16 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
  | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
  | <img src="https://i.postimg.cc/d0GNryv9/screenshot-4.png"/> | <img src="https://i.postimg.cc/prLswcj0/screenshot-5.png"/> | <img src="https://i.postimg.cc/rwBYDJ6m/screenshot-6.png"/> |
 
-# How to use?
+# How to setup?
+
+**Minmum flutter SDK requirement is 3.27.x**
+
+
 **1:** Add flutter_tex latest  [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex) version under dependencies to your package's pubspec.yaml file.
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.12
+  flutter_tex: ^4.0.13
 ``` 
 
 **2:** You can install packages from the command line:
@@ -105,8 +110,6 @@ It completely works offline, without internet connection, but these are required
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
 It'll still work in debug mode without permissions, but it won't work in release application without mentioned permissions.
@@ -136,17 +139,19 @@ For Web support you need to put `<script src="assets/packages/flutter_tex/js/flu
 </head>
 ```
 
-**4:** Now in your Dart code, you can use:
+# How to use?
+
+In your Dart code, you can use like:
 
 ```dart
 import 'package:flutter_tex/flutter_tex.dart'; 
 ```
 
-**5:** Make sure to setup `TeXRederingServer` before rendering TeX:
+Make sure to setup `TeXRederingServer` before rendering TeX:
 
 ```dart
 main() async {
-  TeXRederingServer.renderingEngine = const TeXViewRenderingEngine.katex();
+  TeXRederingServer.renderingEngine = const TeXViewRenderingEngine.mathjax();
 
   if (!kIsWeb) {
     await TeXRederingServer.run();
@@ -157,7 +162,7 @@ main() async {
 }
 ```
 
-**6:** Now you can use TeXView as a widget:
+Now you can use `TeXView` as a widget:
 
 # Examples
 
@@ -254,10 +259,8 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
 - `loadingWidgetBuilder:` Show a loading widget before rendering completes.
 
 - `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
-  
-- `onTeXViewCreated:` Callback when TeXView loading finishes.
 
 For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
-# Cautions:
+# Limitations:
 - Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).

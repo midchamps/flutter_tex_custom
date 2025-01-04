@@ -1,3 +1,7 @@
+## [4.0.13] - Jan 03, 2025
+* Minmum flutter SDK requirement is 3.27.x
+* Please refer to the [TeXView example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib) before using this version.
+
 ## [4.0.12] - Dec 27, 2024
 * Fixed color alpha value calculation in getColor function [#200](https://github.com/Shahxad-Akram/flutter_tex/pull/200
 

@@ -23,9 +23,9 @@ class TeXViewImageVideoExample extends StatelessWidget {
                 borderRadius: TeXViewBorderRadius.all(20),
               ),
             ),
-            TeXViewDocument('Video loaded form Youtube link'),
-            TeXViewVideo.youtube(
-                "https://www.youtube.com/watch?v=YiNbVEXV_NM&lc=Ugyg4ljzrK0D6YfrO854AaABAg"),
+            // TeXViewDocument('Video loaded form Youtube link'),
+            // TeXViewVideo.youtube(
+            //     "https://www.youtube.com/watch?v=YiNbVEXV_NM&lc=Ugyg4ljzrK0D6YfrO854AaABAg"),
             TeXViewDocument(
                 'Image Loaded From Network, this may take some time according to your network speed'),
             TeXViewContainer(

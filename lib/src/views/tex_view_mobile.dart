@@ -12,19 +12,19 @@ class TeXViewState extends State<TeXView> {
   @override
   void initState() {
     TeXRederingServer.onTeXViewRenderedCallback =
-        (teXViewRenderedCallbackMessage) async {
+        (teXViewRenderedCallbackMessage) {
       double newHeight = double.parse(teXViewRenderedCallbackMessage);
+
       if (_currentHeight != newHeight && mounted) {
         setState(() {
           _currentHeight = newHeight;
         });
+        widget.onRenderFinished?.call(_currentHeight);
       }
-      widget.onRenderFinished?.call(_currentHeight);
     };
 
-    TeXRederingServer.onTapCallback = (tapCallbackMessage) {
-      widget.child.onTapCallback(tapCallbackMessage);
-    };
+    TeXRederingServer.onTapCallback =
+        (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
     super.initState();
   }
@@ -54,8 +54,7 @@ class TeXViewState extends State<TeXView> {
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
       if (widget.loadingWidgetBuilder != null) _currentHeight = initialHeight;
-      await _controller
-          .runJavaScriptReturningResult("initView($currentRawData)");
+      await _controller.runJavaScript("initView($currentRawData)");
       _lastRawData = currentRawData;
     }
   }
