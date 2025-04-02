@@ -3,27 +3,28 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class TeXViewState extends State<TeXView> {
-  final WebViewControllerPlus _controller = TeXRederingServer.controller;
+class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+  final WebViewControllerPlus _controller =
+      TeXRenderingServer.webViewControllerPlus;
 
-  double _currentHeight = initialHeight;
+  double _height = initialHeight;
   String _lastRawData = "";
 
   @override
   void initState() {
-    TeXRederingServer.onTeXViewRenderedCallback =
+    TeXRenderingServer.onTeXViewRenderedCallback =
         (teXViewRenderedCallbackMessage) {
       double newHeight = double.parse(teXViewRenderedCallbackMessage);
 
-      if (_currentHeight != newHeight && mounted) {
+      if (_height != newHeight && mounted) {
         setState(() {
-          _currentHeight = newHeight;
+          _height = newHeight;
         });
-        widget.onRenderFinished?.call(_currentHeight);
+        widget.onRenderFinished?.call(_height);
       }
     };
 
-    TeXRederingServer.onTapCallback =
+    TeXRenderingServer.onTapCallback =
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
     super.initState();
@@ -31,16 +32,18 @@ class TeXViewState extends State<TeXView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    updateKeepAlive();
     _renderTeXView();
     return IndexedStack(
       index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _currentHeight == initialHeight
+          ? _height == initialHeight
               ? 1
               : 0
           : 0,
       children: <Widget>[
         SizedBox(
-          height: _currentHeight,
+          height: _height,
           child: WebViewWidget(
             controller: _controller,
           ),
@@ -53,9 +56,12 @@ class TeXViewState extends State<TeXView> {
   void _renderTeXView() async {
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
-      if (widget.loadingWidgetBuilder != null) _currentHeight = initialHeight;
-      await _controller.runJavaScript("initView($currentRawData)");
+      if (widget.loadingWidgetBuilder != null) _height = initialHeight;
+      await _controller.runJavaScript("initView($currentRawData);");
       _lastRawData = currentRawData;
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
