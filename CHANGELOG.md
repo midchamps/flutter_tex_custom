@@ -1,3 +1,6 @@
+## [4.1.1] - Apr 02, 2025
+* Minor fixes.
+
 ## [4.1.0] - Apr 01, 2025
 * MathJax upgraded to version 3.2, a huge performance improvement.
 * Katex has been removed.

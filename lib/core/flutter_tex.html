@@ -20,7 +20,7 @@
     <script>
         teXView = document.getElementById('TeXView');
 
-        
+
         function renderTeXView(onCompleteCallback) {
             MathJax.typesetPromise(["#TeXView"]).then(() => {
                 console.log("MathJax typesetting complete");
