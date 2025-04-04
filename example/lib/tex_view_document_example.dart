@@ -86,14 +86,16 @@ class TeXExample {
                 borderStyle: TeXViewBorderStyle.groove,
                 borderColor: Colors.green))),
         children: [
-          TeXViewDocument(title,
-              style: const TeXViewStyle(
-                  padding: TeXViewPadding.all(10),
-                  borderRadius: TeXViewBorderRadius.all(10),
-                  textAlign: TeXViewTextAlign.center,
-                  width: 250,
-                  margin: TeXViewMargin.zeroAuto(),
-                  backgroundColor: Colors.green)),
+          TeXViewDocument(
+            title,
+            style: const TeXViewStyle(
+                padding: TeXViewPadding.all(10),
+                borderRadius: TeXViewBorderRadius.all(10),
+                textAlign: TeXViewTextAlign.center,
+                // width: 250,
+                margin: TeXViewMargin.zeroAuto(),
+                backgroundColor: Colors.green),
+          ),
           TeXViewDocument(body,
               style: const TeXViewStyle(margin: TeXViewMargin.only(top: 10)))
         ]);

@@ -1,3 +1,6 @@
+## [4.1.2] - Apr 04, 2025
+* Minor fixes.
+
 ## [4.1.1] - Apr 02, 2025
 * Minor fixes.
 

@@ -12,7 +12,6 @@ main() async {
   if (!kIsWeb) {
     await TeXRenderingServer.start();
   }
-
   runApp(const FlutterTeXExample());
 }
 

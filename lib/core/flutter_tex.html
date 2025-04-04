@@ -18,13 +18,11 @@
     <div id="TeXView"></div>
 
     <script>
-        teXView = document.getElementById('TeXView');
-
 
         function renderTeXView(onCompleteCallback) {
             MathJax.typesetPromise(["#TeXView"]).then(() => {
-                console.log("MathJax typesetting complete");
                 onCompleteCallback();
+                console.log("MathJax typesetting complete");
             }).catch((err) => {
                 console.error("Error during MathJax typesetting:", err);
             });

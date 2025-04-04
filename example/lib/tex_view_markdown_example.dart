@@ -5,8 +5,6 @@ String _markdownFlutterTeX = r"""
 # flutter_tex
 [![GitHub stars](https://img.shields.io/github/stars/Shahxad-Akram/flutter_tex?style=social)](https://github.com/Shahxad-Akram/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
-<img src="https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
-
 # Contents
 - [flutter\_tex](#flutter_tex)
 - [Contents](#contents)
@@ -14,7 +12,6 @@ String _markdownFlutterTeX = r"""
 - [How it works?](#how-it-works)
 - [Demo Video](#demo-video)
   - [Click to Watch Demo on Youtube](#click-to-watch-demo-on-youtube)
-- [Screenshots](#screenshots)
 - [How to setup?](#how-to-setup)
     - [Android](#android)
     - [iOS](#ios)
@@ -36,7 +33,6 @@ String _markdownFlutterTeX = r"""
       - [TeXView InkWell Example](#texview-inkwell-example-1)
     - [Complete Example](#complete-example)
       - [Complete Example Code](#complete-example-code)
-- [Application Demo:](#application-demo)
 - [Web Demo:](#web-demo)
 - [Api Changes:](#api-changes)
 - [Api Usage:](#api-usage)
@@ -65,15 +61,6 @@ Flutter TeX is a flutter dart wrapper around the most powerful JavaScript librar
 # Demo Video
 
 ## [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
-
-# Screenshots
- |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
- | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
- | <img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/> |
-
- |                        TeX Document                         |                        Image & Video                        |                           InkWell                           |
- | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
- | <img src="https://i.postimg.cc/d0GNryv9/screenshot-4.png"/> | <img src="https://i.postimg.cc/prLswcj0/screenshot-5.png"/> | <img src="https://i.postimg.cc/rwBYDJ6m/screenshot-6.png"/> |
 
 # How to setup?
 
@@ -225,9 +212,6 @@ TeXView(
 #### [Complete Example Code](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
 
-# Application Demo:
-<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
 [Demo Source](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
 # Web Demo:
@@ -276,7 +260,8 @@ class TeXViewMarkdownExamples extends StatelessWidget {
         title: const Text("TeXViewMarkdown"),
       ),
       body: TeXView(
-        child: TeXViewMarkdown(_markdownFlutterTeX),
+        child: TeXViewMarkdown(_markdownFlutterTeX,
+            style: TeXViewStyle.fromCSS("")),
         style: const TeXViewStyle(
           margin: TeXViewMargin.all(10),
           padding: TeXViewPadding.all(20),

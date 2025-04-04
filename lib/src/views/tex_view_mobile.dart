@@ -3,7 +3,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+class TeXViewState extends State<TeXView> {
   final WebViewControllerPlus _controller =
       TeXRenderingServer.webViewControllerPlus;
 
@@ -12,9 +12,9 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    TeXRenderingServer.onTeXViewRenderedCallback =
-        (teXViewRenderedCallbackMessage) {
-      double newHeight = double.parse(teXViewRenderedCallbackMessage);
+    TeXRenderingServer.onTeXViewRenderedCallback = (_) async {
+      final h = await _controller.webViewHeight;
+      final newHeight = double.parse(h.toString());
 
       if (_height != newHeight && mounted) {
         setState(() {
@@ -32,8 +32,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    updateKeepAlive();
     _renderTeXView();
     return IndexedStack(
       index: widget.loadingWidgetBuilder?.call(context) != null
@@ -57,11 +55,8 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
       if (widget.loadingWidgetBuilder != null) _height = initialHeight;
-      await _controller.runJavaScript("initTeXView($currentRawData);");
+      _controller.runJavaScript("initTeXView($currentRawData);");
       _lastRawData = currentRawData;
     }
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

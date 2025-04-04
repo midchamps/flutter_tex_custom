@@ -9,7 +9,6 @@
 - [About](#about)
 - [How it works?](#how-it-works)
 - [Demo Video](#demo-video)
-  - [Click to Watch Demo on Youtube](#click-to-watch-demo-on-youtube)
 - [Screenshots](#screenshots)
 - [How to setup?](#how-to-setup)
     - [Android](#android)
@@ -36,6 +35,7 @@
 - [Web Demo:](#web-demo)
 - [Api Changes:](#api-changes)
 - [Api Usage:](#api-usage)
+- [ToDo](#todo)
 - [Limitations:](#limitations)
 
 # About
@@ -55,12 +55,12 @@ A Flutter Package to render **fully offline** all types of equations and express
 
 # How it works?
 
-Flutter TeX is a flutter dart wrapper around the most powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credits goes to the developer of those libraries.
+Flutter TeX is a flutter dart wrapper around the most powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credits goes to [MathJax](https://github.com/mathjax/MathJax) developers.
 
 
 # Demo Video
 
-## [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
+* [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
 
 # Screenshots
  |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
@@ -80,7 +80,7 @@ Flutter TeX is a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.1.1
+  flutter_tex: ^4.1.2
 ``` 
 
 **2:** You can install packages from the command line:
@@ -110,6 +110,7 @@ It completely works offline, without internet connection, but these are required
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
 ```
 
 It'll still work in debug mode without permissions, but it won't work in release application without mentioned permissions.
@@ -123,6 +124,14 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
     <key>NSAllowsArbitraryLoads</key> <true/>
   </dict>
 <key>io.flutter.embedded_views_preview</key> <true/> 
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>https</string>
+    <string>http</string>
+    <string>tel</string>
+    <string>mailto</string>
+</array> 
+
 ```
 
 ### Web
@@ -254,6 +263,9 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
 - `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
 
 For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
+
+# ToDo
+- MathJax configurations from Flutter.
 
 # Limitations:
 - Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).

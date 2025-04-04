@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 /// A rendering server for TeXView. This is backed by a [LocalhostServer] and a [WebViewControllerPlus].
@@ -36,16 +37,24 @@ class TeXRenderingServer {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (String url) {
+            _debugPrint("Page finished loading: $url");
             onPageFinished?.call(url);
             controllerCompleter.complete();
+          },
+          onNavigationRequest: (request) {
+            if (request.url.contains(
+                "http://localhost:${_server.port}/packages/flutter_tex/core/flutter_tex.html")) {
+              return NavigationDecision.navigate;
+            } else {
+              _launchURL(request.url);
+              return NavigationDecision.prevent;
+            }
           },
         ),
       )
       ..setOnConsoleMessage(
         (message) {
-          if (kDebugMode) {
-            print(message.message);
-          }
+          _debugPrint(message.message);
         },
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -56,9 +65,23 @@ class TeXRenderingServer {
     return controllerCompleter.future;
   }
 
+  static _launchURL(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static void _debugPrint(String message) {
+    if (kDebugMode) {
+      print(message);
+    }
+  }
+
   static Future<void> stop() async {
     await _server.close();
   }
 }
 
-typedef RenderingEngineCallback = void Function(String message);
+typedef RenderingEngineCallback = void Function(dynamic message);
