@@ -1,3 +1,6 @@
+## [4.1.3] - Apr 06, 2025
+* Web related issues fixed.
+
 ## [4.1.2] - Apr 04, 2025
 * Minor fixes.
 

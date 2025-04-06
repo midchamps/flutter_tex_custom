@@ -15,16 +15,22 @@ external set onTapCallback(JSFunction callback);
 external void initWebTeXView(String viewId, String rawData);
 
 class TeXViewState extends State<TeXView> {
-  String? _lastData;
-  double widgetHeight = initialHeight;
   final String _viewId = UniqueKey().toString();
+  final HTMLIFrameElement iframeElement = HTMLIFrameElement()
+    ..src = "assets/packages/flutter_tex/core/flutter_tex.html"
+    ..style.height = '100%'
+    ..style.width = '100%'
+    ..style.border = '0';
+
+  double _teXViewHeight = initialHeight;
+  String _lastRawData = '';
   bool _isReady = false;
 
   @override
   Widget build(BuildContext context) {
-    _initTeXView();
+    _renderTeXView();
     return SizedBox(
-      height: widgetHeight,
+      height: _teXViewHeight,
       child: HtmlElementView(
         key: widget.key ?? ValueKey(_viewId),
         viewType: _viewId,
@@ -34,21 +40,17 @@ class TeXViewState extends State<TeXView> {
 
   @override
   void initState() {
-    platformViewRegistry.registerViewFactory(
-        _viewId,
-        (int id) => HTMLIFrameElement()
-          ..src = "assets/packages/flutter_tex/core/flutter_tex.html"
-          ..id = _viewId
-          ..style.height = '100%'
-          ..style.width = '100%'
-          ..style.border = '0');
+    iframeElement.id = _viewId;
 
-    onTapCallback = onTap.toJS;
+    platformViewRegistry.registerViewFactory(
+        _viewId, (int id) => iframeElement);
+
     teXViewRenderedCallback = onTeXViewRendered.toJS;
+    onTapCallback = onTap.toJS;
 
     _isReady = true;
+    _renderTeXView();
 
-    _initTeXView();
     super.initState();
   }
 
@@ -58,22 +60,21 @@ class TeXViewState extends State<TeXView> {
 
   void onTeXViewRendered(JSNumber message) {
     double viewHeight = double.parse(message.toString());
-    if (viewHeight != widgetHeight) {
+    if (viewHeight != _teXViewHeight && mounted) {
       setState(() {
-        widgetHeight = viewHeight;
+        _teXViewHeight = viewHeight;
       });
     }
   }
 
-  void _initTeXView() {
+  void _renderTeXView() {
     if (!_isReady) {
       return;
     }
-
-    var rawData = getRawData(widget);
-    if (rawData != _lastData) {
-      initWebTeXView(_viewId, rawData);
-      _lastData = rawData;
+    var currentRawData = getRawData(widget);
+    if (currentRawData != _lastRawData) {
+      initWebTeXView(_viewId, currentRawData);
+      _lastRawData = currentRawData;
     }
   }
 }
