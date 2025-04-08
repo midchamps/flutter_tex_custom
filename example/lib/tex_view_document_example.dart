@@ -9,6 +9,21 @@ class TeXExample {
       support.</p>
       """);
 
+  static TeXViewWidget longFormulaScroll =
+      _teXViewWidget(r"""<h4>Long Formula Scroll</h4>""", r"""
+
+
+    <p>Some text before the formula:</p>
+    <div style="overflow-x: auto; max-width: 100%;">
+      $$
+     \text{ (Horizontal scroll long formula)} E = mc^2 + \frac{p^2}{2m} + \sum_{i} \frac{(p_i - qA_i)^2}{2m_i} + V(r) + ... 
+      $$
+    </div>
+    <p>Some text after the formula.</p>
+
+
+      """);
+
   static TeXViewWidget quadraticEquation =
       _teXViewWidget(r"<h4>Quadratic Equation</h4>", r"""
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
@@ -96,8 +111,12 @@ class TeXExample {
                 margin: TeXViewMargin.zeroAuto(),
                 backgroundColor: Colors.green),
           ),
-          TeXViewDocument(body,
-              style: const TeXViewStyle(margin: TeXViewMargin.only(top: 10)))
+          TeXViewDocument(
+            body,
+            style: const TeXViewStyle(
+                margin: TeXViewMargin.only(top: 10),
+                overflow: TeXViewOverflow.auto),
+          ),
         ]);
   }
 }
@@ -120,6 +139,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
           TeXExample.relationEnergyPrincipalQuantum,
           TeXExample.alignedTag,
           TeXExample.bohrRadius,
+          TeXExample.longFormulaScroll,
           TeXExample.chemistryEquations,
           TeXExample.matrix,
           TeXViewDetails(

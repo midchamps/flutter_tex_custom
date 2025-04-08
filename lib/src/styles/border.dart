@@ -38,8 +38,7 @@ class TeXViewBorderDecoration {
     return "${borderWidth}px ${_getTeXViewBorderStyleValue(borderStyle)} ${getColor(borderColor)}";
   }
 
-  static String _getTeXViewBorderStyleValue(
-      TeXViewBorderStyle? teXViewBorderStyle) {
+  String _getTeXViewBorderStyleValue(TeXViewBorderStyle? teXViewBorderStyle) {
     switch (teXViewBorderStyle) {
       case TeXViewBorderStyle.none:
         return "none";
