@@ -168,7 +168,7 @@ For Web support you need to put `<script src="assets/packages/flutter_tex/js/flu
 <head>
     ...
     ...
-    <script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>
+    <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
 </head>
 ```
 
