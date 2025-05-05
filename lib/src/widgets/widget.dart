@@ -1,4 +1,4 @@
-import 'package:flutter_tex/src/models/widget_meta.dart';
+import 'package:flutter_tex/src/utils/widget_meta.dart';
 
 abstract class TeXViewWidget {
   const TeXViewWidget();

@@ -22,37 +22,43 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
       ),
       body: ListView(
         shrinkWrap: true,
+        padding: const EdgeInsets.all(16.0),
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: RichText(
-              text: TextSpan(
-                style: baseStyle,
-                children: <InlineSpan>[
-                  const TextSpan(text: 'This is some text before the icon. '),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.middle,
-                    child: TeXWidget(
-                      math: formula,
-                      fontSize: fontSize,
-                    ),
+          RichText(
+            text: TextSpan(
+              style: baseStyle,
+              children: <InlineSpan>[
+                const TextSpan(text: 'When'),
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.middle,
+                  child: TeXWidget(
+                    math: r"a \ne 0",
+                    fontSize: fontSize,
                   ),
-                  const TextSpan(text: ' Here is some text after the icon.'),
-                  const TextSpan(text: ' You can add more text and icons '),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.middle,
-                    child: TeXWidget(
-                        math:
-                            r"""$$Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-$$""",
-                        fontSize: fontSize),
+                ),
+                const TextSpan(text: ', there are two solutions to'),
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.middle,
+                  child: TeXWidget(
+                    math: r"ax^2 + bx + c = 0",
+                    fontSize: fontSize,
                   ),
-                  const TextSpan(text: ' like this.'),
-                ],
-              ),
+                ),
+                const TextSpan(text: ' and they are:'),
+              ],
             ),
-          )
+          ),
+          TeXWidget(
+              math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
+              fontSize: fontSize * 3)
         ],
       ),
     );
   }
 }
+
+
+  // static TeXViewWidget quadraticEquation =
+  //     _teXViewWidget(r"<h4>Quadratic Equation</h4>", r"""
+  //    When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+  //    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");

@@ -1,6 +1,5 @@
 library;
 
-export 'package:flutter_tex/src/models/font.dart';
 export 'package:flutter_tex/src/styles/border.dart';
 export 'package:flutter_tex/src/styles/font_style.dart';
 export 'package:flutter_tex/src/styles/margin.dart';
@@ -23,3 +22,5 @@ export 'package:flutter_tex/src/widgets/video.dart';
 export 'package:flutter_tex/src/widgets/widget.dart';
 export 'package:flutter_tex/src/widgets/details.dart';
 export 'package:flutter_tex/src/utils/tex_rendering_server.dart';
+export 'package:flutter_tex/src/utils/font.dart';
+export 'package:flutter_tex/src/utils/input_types.dart';

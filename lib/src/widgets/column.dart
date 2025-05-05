@@ -1,5 +1,5 @@
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/widget_meta.dart';
+import 'package:flutter_tex/src/utils/widget_meta.dart';
 import 'package:flutter_tex/src/utils/style_utils.dart';
 
 /// A widget that displays its children in a vertical array.

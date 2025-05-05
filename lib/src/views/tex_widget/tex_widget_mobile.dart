@@ -13,22 +13,23 @@ class TeXWidgetState extends State<TeXWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: _webViewControllerPlus.runJavaScriptReturningResult(
-            "TeX2SVG(${jsonEncode(widget.math)});"),
+            "TeX2SVG(${jsonEncode(widget.math)}, '${widget.inputType.value}');"),
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
+            var rawSVG = jsonDecode(snapshot.data.toString());
             return SvgPicture.string(
-              jsonDecode(snapshot.data.toString())
-                  .replaceFirst(
-                      "<mjx-container class=\"MathJax\" jax=\"SVG\">", "")
-                  .replaceFirst("</mjx-container>", ""),
+              rawSVG,
               height: widget.fontSize,
               width: widget.fontSize,
+              fit: BoxFit.contain,
+              alignment: Alignment.center,
             );
           } else {
-            return Text(
-              widget.math,
-              style: TextStyle(fontSize: widget.fontSize),
-            );
+            return widget.loadingWidgetBuilder?.call(context) ??
+                Text(
+                  widget.math,
+                  style: TextStyle(),
+                );
           }
         });
   }

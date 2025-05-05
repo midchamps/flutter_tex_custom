@@ -6,12 +6,15 @@
 
     <script>
 
-
-        var sgg = window.TeX2SVG('Consider the formulas:a^2 + b^2 = c^2,', {
-            display: true,
-            em: 16,
-            ex: 8,
-            containerWidth: 80 * 16,
+        var sgg = window.TeX2SVG(`
+     \\begin{bmatrix}
+         a & b \\\\
+         c & d
+      \\end{bmatrix}`, "tex", {
+            // display: false,
+            // em: 16,
+            // ex: 8,
+            // containerWidth: 80 * 16,
         });
 
         console.log(sgg);
