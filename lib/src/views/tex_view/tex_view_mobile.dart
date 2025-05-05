@@ -44,8 +44,7 @@ class TeXViewState extends State<TeXView> {
             controller: _webViewControllerPlus,
           ),
         ),
-        widget.loadingWidgetBuilder?.call(context) ??
-            const SizedBox.shrink()
+        widget.loadingWidgetBuilder?.call(context) ?? const SizedBox.shrink()
       ],
     );
   }

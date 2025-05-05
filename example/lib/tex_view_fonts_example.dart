@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewFontsExamples extends StatelessWidget {
-
-  const TeXViewFontsExamples(
-      {super.key});
+  const TeXViewFontsExamples({super.key});
 
   @override
   Widget build(BuildContext context) {

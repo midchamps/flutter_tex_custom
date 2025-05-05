@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewInkWellExample extends StatefulWidget {
-
-  const TeXViewInkWellExample(
-      {super.key});
+  const TeXViewInkWellExample({super.key});
 
   @override
   State<TeXViewInkWellExample> createState() => _TeXViewInkWellExampleState();

@@ -16,8 +16,24 @@
     - [Web](#web)
 - [How to use?](#how-to-use)
     - [TeXWidget Example](#texwidget-example)
-    - [Full Example](#full-example)
-      - [Full Example](#full-example-1)
+    - [TeXView Example](#texview-example)
+- [Examples](#examples)
+    - [TeXWidget Example](#texwidget-example-1)
+      - [TeXWidget Example](#texwidget-example-2)
+    - [TeXView Document Example](#texview-document-example)
+      - [TeXView Document Example](#texview-document-example-1)
+    - [TeXView Markdown Example](#texview-markdown-example)
+      - [TeXView Markdown Example](#texview-markdown-example-1)
+    - [TeXView Quiz Example](#texview-quiz-example)
+      - [TeXView Quiz Example](#texview-quiz-example-1)
+    - [TeXView Custom Fonts Example](#texview-custom-fonts-example)
+      - [TeXView Custom Fonts Example](#texview-custom-fonts-example-1)
+    - [TeXView Image and Video Example](#texview-image-and-video-example)
+      - [TeXView Image and Video Example](#texview-image-and-video-example-1)
+    - [TeXView InkWell Example](#texview-inkwell-example)
+      - [TeXView InkWell Example](#texview-inkwell-example-1)
+    - [Complete Example](#complete-example)
+      - [Complete Example Code](#complete-example-code)
 - [Application Demo:](#application-demo)
 - [Web Demo:](#web-demo)
 - [Api Changes:](#api-changes)
@@ -49,13 +65,14 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 * [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
 
 # Screenshots
- |        Fonts Sample             Apr    TeX Document         |
+ |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
  | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
  | <img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/> |
 
  |                        TeX Document                         |                        Image & Video                        |                           InkWell                           |
  | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
  | <img src="https://i.postimg.cc/d0GNryv9/screenshot-4.png"/> | <img src="https://i.postimg.cc/prLswcj0/screenshot-5.png"/> | <img src="https://i.postimg.cc/rwBYDJ6m/screenshot-6.png"/> |
+
 
 # How to setup?
 
@@ -66,7 +83,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.1
+  flutter_tex: ^5.0.2
 ``` 
 
 **2:** You can install packages from the command line:
@@ -181,9 +198,12 @@ main() async {
 }
 ```
 
-Now you can use `TeXWidget` or `TeXView` as a widget:
+Now you can use `TeXWidget` or `TeXView` as a widgets:
+
+
 
 ### TeXWidget Example
+
 
 ```dart
 import 'package:flutter/foundation.dart';
@@ -277,8 +297,71 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
 
 ```
 
-### Full Example
-#### [Full Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example)
+### TeXView Example
+
+
+```dart
+TeXView(
+    child: TeXViewColumn(children: [
+      TeXViewInkWell(
+        id: "id_0",
+        child: TeXViewColumn(children: [
+          TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+              style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
+          TeXViewContainer(
+            child: TeXViewImage.network(
+                'https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(10),
+              borderRadius: TeXViewBorderRadius.all(20),
+            ),
+          ),
+          TeXViewDocument(r"""<p>                                
+                       When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                       $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+              style: TeXViewStyle.fromCSS(
+                  'padding: 15px; color: white; background: green'))
+        ]),
+      )
+    ]),
+    style: TeXViewStyle(
+      elevation: 10,
+      borderRadius: TeXViewBorderRadius.all(25),
+      border: TeXViewBorder.all(TeXViewBorderDecoration(
+          borderColor: Colors.blue,
+          borderStyle: TeXViewBorderStyle.solid,
+          borderWidth: 5)),
+      backgroundColor: Colors.white,
+    ),
+   );
+```
+
+# Examples
+
+### TeXWidget Example
+#### [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
+
+### TeXView Document Example
+#### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
+
+### TeXView Markdown Example
+#### [TeXView Markdown Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
+
+### TeXView Quiz Example
+#### [TeXView Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
+
+### TeXView Custom Fonts Example
+#### [TeXView Custom Fonts Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
+
+### TeXView Image and Video Example
+#### [TeXView Image and Video Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
+
+### TeXView InkWell Example
+#### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
+
+### Complete Example
+#### [Complete Example Code](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
+
 
 # Application Demo:
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
