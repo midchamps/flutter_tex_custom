@@ -31,25 +31,21 @@ class TeXViewState extends State<TeXView> {
   @override
   Widget build(BuildContext context) {
     _renderTeXView();
-    return Column(
-      children: [
-        IndexedStack(
-          index: widget.loadingWidgetBuilder?.call(context) != null
-              ? _teXViewHeight == initialHeight
-                  ? 1
-                  : 0
-              : 0,
-          children: <Widget>[
-            SizedBox(
-              height: _teXViewHeight,
-              child: WebViewWidget(
-                controller: _webViewControllerPlus,
-              ),
-            ),
-            widget.loadingWidgetBuilder?.call(context) ??
-                const SizedBox.shrink()
-          ],
+    return IndexedStack(
+      index: widget.loadingWidgetBuilder?.call(context) != null
+          ? _teXViewHeight == initialHeight
+              ? 1
+              : 0
+          : 0,
+      children: <Widget>[
+        SizedBox(
+          height: _teXViewHeight,
+          child: WebViewWidget(
+            controller: _webViewControllerPlus,
+          ),
         ),
+        widget.loadingWidgetBuilder?.call(context) ??
+            const SizedBox.shrink()
       ],
     );
   }
