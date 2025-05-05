@@ -1,0 +1,23 @@
+<head>
+    <script src="mathjax_lite_dom.js"></script>
+
+
+    <div id="math"></div>
+
+    <script>
+
+
+        var sgg = window.TeX2SVG('Consider the formulas:a^2 + b^2 = c^2,', {
+            display: true,
+            em: 16,
+            ex: 8,
+            containerWidth: 80 * 16,
+        });
+
+        console.log(sgg);
+
+        var math = document.getElementById('math');
+        math.innerHTML = sgg;
+
+    </script>
+</head>

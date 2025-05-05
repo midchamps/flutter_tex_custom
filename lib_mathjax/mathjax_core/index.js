@@ -21,7 +21,6 @@ Loader.preLoad(
 // Load the components that we want to combine into one component
 //   (the ones listed in the preLoad() call above)
 require('mathjax-full/components/src/core/core.js');
-
 require('mathjax-full/components/src/input/tex-full/tex-full.js');
 require('mathjax-full/components/src/input/mml/mml.js');
 require('mathjax-full/components/src/input/asciimath/asciimath.js');

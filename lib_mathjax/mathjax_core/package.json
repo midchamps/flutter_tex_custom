@@ -1,5 +1,5 @@
 {
-  "name": "custom_mathjax",
+  "name": "mathjax_core",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

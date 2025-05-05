@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
@@ -28,23 +31,46 @@ class TeXViewState extends State<TeXView> {
     super.initState();
   }
 
+  String svgstring = '';
+
   @override
   Widget build(BuildContext context) {
     _renderTeXView();
-    return IndexedStack(
-      index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _teXViewHeight == initialHeight
-              ? 1
-              : 0
-          : 0,
-      children: <Widget>[
-        SizedBox(
-          height: _teXViewHeight,
-          child: WebViewWidget(
-            controller: _webViewControllerPlus,
-          ),
+    return Column(
+      children: [
+        FloatingActionButton(onPressed: () async {
+          var gg = (await _webViewControllerPlus.runJavaScriptReturningResult(
+                  "TeX2SVG(${jsonEncode('Consider the formulas: @@a^2 + b^2 = c^2@@, which is the Pythagorean theorem, and **E=mc^2**.')});"))
+              .toString();
+
+          svgstring = jsonDecode(gg)
+              .replaceFirst("<mjx-container class=\"MathJax\" jax=\"SVG\">", "")
+              .replaceFirst("</mjx-container>", "");
+
+          print(svgstring);
+        }),
+        // SvgPicture.string(
+        //   svgstring,
+        //   fit: BoxFit.contain,
+        //   height: 200,
+        // ),
+        IndexedStack(
+          index: widget.loadingWidgetBuilder?.call(context) != null
+              ? _teXViewHeight == initialHeight
+                  ? 1
+                  : 0
+              : 0,
+          children: <Widget>[
+            SizedBox(
+              height: _teXViewHeight,
+              child: WebViewWidget(
+                controller: _webViewControllerPlus,
+              ),
+            ),
+            widget.loadingWidgetBuilder?.call(context) ??
+                const SizedBox.shrink()
+          ],
         ),
-        widget.loadingWidgetBuilder?.call(context) ?? const SizedBox.shrink()
       ],
     );
   }
