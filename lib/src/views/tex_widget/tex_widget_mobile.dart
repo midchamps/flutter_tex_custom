@@ -13,7 +13,7 @@ class TeXWidgetState extends State<TeXWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: _webViewControllerPlus.runJavaScriptReturningResult(
-            "TeX2SVG(${jsonEncode(widget.math)}, '${widget.inputType.value}');"),
+            "teX2SVG(${jsonEncode(widget.math)}, '${widget.inputType.value}');"),
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
             var rawSVG = jsonDecode(snapshot.data.toString());

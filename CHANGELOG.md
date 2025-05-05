@@ -1,3 +1,7 @@
+## [5.0.0] - May 05, 2025
+* Now math can be render as `TeXWidget` along other flutter widgets, `TeXWidget` doesn't depend on a webview, multiple `TeXWidget`s can be used on the same page.
+* Refer to the example for details.
+
 ## [4.1.3] - Apr 06, 2025
 * Web related issues fixed.
 

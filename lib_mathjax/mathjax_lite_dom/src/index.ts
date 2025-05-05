@@ -23,7 +23,7 @@ const asciiInput = new AsciiMath(inputOptions);
 
 const outputJax = new SVG()
 
-function TeX2SVG(math: string, inputType: string, options?: any): string {
+function teX2SVG(math: string, inputType: string, options?: any): string {
     return adaptor.innerHTML(mathjax.document('', {
         InputJax: getInputType(inputType), OutputJax: outputJax
     }).convert(math, options))
@@ -42,4 +42,4 @@ function getInputType(input: string) {
     }
 }
 
-(window as any).TeX2SVG = TeX2SVG;
+(window as any).teX2SVG = teX2SVG;

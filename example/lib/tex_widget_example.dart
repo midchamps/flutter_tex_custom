@@ -1,5 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+
+main() async {
+  if (!kIsWeb) {
+    await TeXRenderingServer.start();
+  }
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: TeXWidgetExample(),
+  ));
+}
 
 class TeXWidgetExample extends StatefulWidget {
   const TeXWidgetExample({super.key});
@@ -12,11 +23,10 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
   double fontSize = 18.0;
   TextStyle baseStyle = TextStyle(fontSize: 18.0, color: Colors.black);
 
-  String formula = r"a^2 + b^2 = c^2";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("TeX Widget Example"),
       ),
@@ -24,41 +34,56 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
         shrinkWrap: true,
         padding: const EdgeInsets.all(16.0),
         children: [
-          RichText(
-            text: TextSpan(
-              style: baseStyle,
-              children: <InlineSpan>[
-                const TextSpan(text: 'When'),
-                WidgetSpan(
-                  alignment: PlaceholderAlignment.middle,
-                  child: TeXWidget(
-                    math: r"a \ne 0",
-                    fontSize: fontSize,
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 4),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Quadratic Formula",
+                    style: baseStyle.copyWith(
+                      fontSize: fontSize * 1.5,
+                      color: Colors.black,
+                    )),
+                RichText(
+                  text: TextSpan(
+                    style: baseStyle,
+                    children: <InlineSpan>[
+                      const TextSpan(text: 'When'),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        child: TeXWidget(
+                          math: r"a \ne 0",
+                          fontSize: fontSize,
+                        ),
+                      ),
+                      const TextSpan(text: ', there are two solutions to'),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        child: TeXWidget(
+                          math: r"ax^2 + bx + c = 0",
+                          fontSize: fontSize,
+                        ),
+                      ),
+                      const TextSpan(text: ' and they are:'),
+                    ],
                   ),
                 ),
-                const TextSpan(text: ', there are two solutions to'),
-                WidgetSpan(
-                  alignment: PlaceholderAlignment.middle,
-                  child: TeXWidget(
-                    math: r"ax^2 + bx + c = 0",
-                    fontSize: fontSize,
-                  ),
+                Divider(
+                  height: 20,
+                  color: Colors.transparent,
                 ),
-                const TextSpan(text: ' and they are:'),
+                TeXWidget(
+                    math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
+                    fontSize: fontSize * 3)
               ],
             ),
           ),
-          TeXWidget(
-              math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
-              fontSize: fontSize * 3)
         ],
       ),
     );
   }
 }
-
-
-  // static TeXViewWidget quadraticEquation =
-  //     _teXViewWidget(r"<h4>Quadratic Equation</h4>", r"""
-  //    When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  //    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
