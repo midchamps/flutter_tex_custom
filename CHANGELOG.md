@@ -1,3 +1,6 @@
+## [5.0.3] - May 06, 2025
+* `TeXWidget` renamed ot `TeX2SVG`
+
 ## [5.0.2] - May 05, 2025
 * Now math can be render as `TeXWidget` along other flutter widgets, `TeXWidget` doesn't depend on a webview, multiple `TeXWidget`s can be used on the same page.
 * Refer to the example for details.

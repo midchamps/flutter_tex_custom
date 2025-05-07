@@ -15,11 +15,11 @@
     - [iOS](#ios)
     - [Web](#web)
 - [How to use?](#how-to-use)
-    - [TeXWidget Example](#texwidget-example)
+    - [TeX2SVG Example](#tex2svg-example)
     - [TeXView Example](#texview-example)
 - [Examples](#examples)
-    - [TeXWidget Example](#texwidget-example-1)
-      - [TeXWidget Example](#texwidget-example-2)
+    - [TeX2SVG Example](#tex2svg-example-1)
+      - [TeX2SVG Example](#tex2svg-example-2)
     - [TeXView Document Example](#texview-document-example)
       - [TeXView Document Example](#texview-document-example-1)
     - [TeXView Markdown Example](#texview-markdown-example)
@@ -83,7 +83,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.2
+  flutter_tex: ^5.0.3
 ``` 
 
 **2:** You can install packages from the command line:
@@ -198,11 +198,11 @@ main() async {
 }
 ```
 
-Now you can use `TeXWidget` or `TeXView` as a widgets:
+Now you can use `TeX2SVG` or `TeXView` as a widgets:
 
 
 
-### TeXWidget Example
+### TeX2SVG Example
 
 
 ```dart
@@ -216,24 +216,25 @@ main() async {
   }
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: TeXWidgetExample(),
+    home: TeX2SVGExample(),
   ));
 }
 
-class TeXWidgetExample extends StatefulWidget {
-  const TeXWidgetExample({super.key});
+class TeX2SVGExample extends StatefulWidget {
+  const TeX2SVGExample({super.key});
 
   @override
-  State<TeXWidgetExample> createState() => _TeXWidgetExampleState();
+  State<TeX2SVGExample> createState() => _TeX2SVGExampleState();
 }
 
-class _TeXWidgetExampleState extends State<TeXWidgetExample> {
+class _TeX2SVGExampleState extends State<TeX2SVGExample> {
   double fontSize = 18.0;
   TextStyle baseStyle = TextStyle(fontSize: 18.0, color: Colors.black);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("TeX Widget Example"),
       ),
@@ -262,7 +263,7 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
                       const TextSpan(text: 'When'),
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
-                        child: TeXWidget(
+                        child: TeX2SVG(
                           math: r"a \ne 0",
                           fontSize: fontSize,
                         ),
@@ -270,7 +271,7 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
                       const TextSpan(text: ', there are two solutions to'),
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
-                        child: TeXWidget(
+                        child: TeX2SVG(
                           math: r"ax^2 + bx + c = 0",
                           fontSize: fontSize,
                         ),
@@ -283,7 +284,7 @@ class _TeXWidgetExampleState extends State<TeXWidgetExample> {
                   height: 20,
                   color: Colors.transparent,
                 ),
-                TeXWidget(
+                TeX2SVG(
                     math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
                     fontSize: fontSize * 3)
               ],
@@ -338,8 +339,8 @@ TeXView(
 
 # Examples
 
-### TeXWidget Example
-#### [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
+### TeX2SVG Example
+#### [TeX2SVG Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex2svg_example.dart)
 
 ### TeXView Document Example
 #### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
