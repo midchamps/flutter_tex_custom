@@ -23,5 +23,5 @@ export 'package:flutter_tex/src/tex_view/widgets/widget.dart';
 export 'package:flutter_tex/src/tex_view/widgets/details.dart';
 export 'package:flutter_tex/src/tex_server/tex_rendering_server.dart';
 export 'package:flutter_tex/src/tex_view/utils/font.dart';
-export 'package:flutter_tex/src/tex_widget/utils/input_types.dart';
+export 'package:flutter_tex/src/tex_widget/utils/tex_input_types.dart';
 export 'package:flutter_svg/flutter_svg.dart';

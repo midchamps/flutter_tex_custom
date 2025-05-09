@@ -1,9 +1,9 @@
-enum InputType {
+enum TeXInputType {
   teX("teX"),
   mathML("mathML"),
   asciiMath("asciiMath");
 
   final String value;
 
-  const InputType(this.value);
+  const TeXInputType(this.value);
 }

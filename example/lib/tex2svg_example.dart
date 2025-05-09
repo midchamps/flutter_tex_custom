@@ -56,6 +56,7 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
                         child: TeX2SVG(
+                          teXInputType: TeXInputType.teX,
                           math: r"a \ne 0",
                         ),
                       ),

@@ -10,7 +10,7 @@ class TeX2SVGState extends State<TeX2SVG> {
 
   @override
   Widget build(BuildContext context) {
-    String svg = teX2SVG(widget.math, widget.inputType.value);
+    String svg = teX2SVG(widget.math, widget.teXInputType.value);
     return widget.formulaWidgetBuilder?.call(context, svg) ??
         SvgPicture.string(
           svg,

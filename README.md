@@ -8,8 +8,10 @@
 - [Contents](#contents)
 - [About](#about)
 - [How it works?](#how-it-works)
-- [Demo Video](#demo-video)
-- [Screenshots](#screenshots)
+- [Web Demo: https://flutter-tex.web.app](#web-demo-httpsflutter-texwebapp)
+- [Application Demo:](#application-demo)
+- [Demo Video: Click to Watch Demo on Youtube](#demo-video-click-to-watch-demo-on-youtube)
+- [Screenshots:](#screenshots)
 - [How to setup?](#how-to-setup)
     - [Android](#android)
     - [iOS](#ios)
@@ -34,15 +36,13 @@
       - [TeXView InkWell Example](#texview-inkwell-example-1)
     - [Complete Example](#complete-example)
       - [Complete Example Code](#complete-example-code)
-- [Application Demo:](#application-demo)
-- [Web Demo:](#web-demo)
 - [Api Changes:](#api-changes)
 - [Api Usage (TeXView):](#api-usage-texview)
 - [ToDo](#todo)
 - [Limitations:](#limitations)
 
 # About
-A Flutter Package, to render **fully offline** all types of equations and expressions based on **LaTeX** , **TeX** and **MathML**, most commonly used are as followings:
+A [MathJax](https://github.com/mathjax/MathJax) based Flutter Package, to render **fully offline** all types of equations and expressions based on **LaTeX** , **TeX** and **MathML**, most commonly used are as followings:
 
 - **Mathematics / Maths Equations and expressions** (Algebra, Calculus, Geometry, Geometry etc...)
 
@@ -58,13 +58,18 @@ A Flutter Package, to render **fully offline** all types of equations and expres
 
 # How it works?
 
-Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credits goes to [MathJax](https://github.com/mathjax/MathJax) developers.
+Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credit goes to [MathJax](https://github.com/mathjax/MathJax) developers.
 
-# Demo Video
 
-* [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
+# Web Demo: [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
-# Screenshots
+
+# Application Demo:
+<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
+# Demo Video: [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
+
+# Screenshots:
  |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
  | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
  | <img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/> |
@@ -109,7 +114,7 @@ Make sure to add this line `android:usesCleartextTraffic="true"` in your `<proje
 ```
 
 It completely works offline, without internet connection, but these are required permissions to work properly:
-Apr
+
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
@@ -144,10 +149,8 @@ and intents in queries block:
 ```
 
 
-It'll still work in debug mode without permissions, but it won't work in release application without mentioned permissions.
-
 ### iOS
-Add following code in your `<project-directory>/ios/Runner/Info.plist`
+Add following code in `<project-directory>/ios/Runner/Info.plist`
 
 ```plist
 <key>NSAppTransportSecurity</key>
@@ -166,7 +169,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```
 
 ### Web
-For Web support you need to put `<script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
+For Web support modify `<project-directory>/web/index.html` like this.
 
 ```html
 <head>
@@ -363,14 +366,6 @@ TeXView(
 ### Complete Example
 #### [Complete Example Code](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
-
-# Application Demo:
-<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-[Demo Source](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
-
-# Web Demo:
-You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Api Changes:
 * Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).

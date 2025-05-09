@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/tex_widget/utils/input_types.dart';
+import 'package:flutter_tex/src/tex_widget/utils/tex_input_types.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/tex2svg_mobile.dart'
     if (dart.library.html) 'package:flutter_tex/src/tex_widget/tex2svg/tex2svg_web.dart';
 
@@ -9,7 +9,7 @@ class TeX2SVG extends StatefulWidget {
   final String math;
 
   /// The type of input math to be rendered.
-  final InputType inputType;
+  final TeXInputType teXInputType;
 
   /// Show a loading widget before rendering completes.
   final Widget Function(BuildContext context, String svg)? formulaWidgetBuilder;
@@ -20,7 +20,7 @@ class TeX2SVG extends StatefulWidget {
   const TeX2SVG({
     super.key,
     required this.math,
-    this.inputType = InputType.teX,
+    this.teXInputType = TeXInputType.teX,
     this.loadingWidgetBuilder,
     this.formulaWidgetBuilder,
   });
