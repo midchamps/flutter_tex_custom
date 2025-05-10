@@ -88,7 +88,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.3
+  flutter_tex: ^5.0.4
 ``` 
 
 **2:** You can install packages from the command line:
@@ -239,7 +239,7 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("TeX Widget Example"),
+        title: const Text("TeX2SVG Example"),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -263,12 +263,12 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                   text: TextSpan(
                     style: baseStyle,
                     children: <InlineSpan>[
-                      const TextSpan(text: 'When'),
+                      const TextSpan(text: 'When '),
                       WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
                         child: TeX2SVG(
+                          teXInputType: TeXInputType.teX,
                           math: r"a \ne 0",
-                          fontSize: fontSize,
                         ),
                       ),
                       const TextSpan(text: ', there are two solutions to'),
@@ -276,7 +276,6 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                         alignment: PlaceholderAlignment.middle,
                         child: TeX2SVG(
                           math: r"ax^2 + bx + c = 0",
-                          fontSize: fontSize,
                         ),
                       ),
                       const TextSpan(text: ' and they are:'),
@@ -288,8 +287,18 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                   color: Colors.transparent,
                 ),
                 TeX2SVG(
-                    math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
-                    fontSize: fontSize * 3)
+                  math: r"""x = {-b \pm \sqrt{b^2-4ac} \over 2a}""",
+                  formulaWidgetBuilder: (context, svg) {
+                    double displayFontSize = fontSize * 3;
+                    return SvgPicture.string(
+                      svg,
+                      height: displayFontSize,
+                      width: displayFontSize,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -298,7 +307,6 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
     );
   }
 }
-
 ```
 
 ### TeXView Example

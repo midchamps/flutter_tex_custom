@@ -1,3 +1,6 @@
+## [5.0.4] - May 09, 2025
+* Minor fix.
+
 ## [5.0.3] - May 06, 2025
 * `TeXWidget` renamed ot `TeX2SVG`
 
