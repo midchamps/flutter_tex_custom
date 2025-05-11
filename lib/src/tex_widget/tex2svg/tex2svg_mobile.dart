@@ -14,7 +14,7 @@ class TeX2SVGState extends State<TeX2SVG> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: _webViewControllerPlus.runJavaScriptReturningResult(
-            "teX2SVG(${jsonEncode(widget.math)}, '${widget.teXInputType.value}');"),
+            "flutterTeXLiteDOM.teX2SVG(${jsonEncode(widget.math)}, '${widget.teXInputType.value}');"),
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
             var svg = snapshot.data.toString();

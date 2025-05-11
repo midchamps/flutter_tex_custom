@@ -13,8 +13,7 @@ class TeXViewState extends State<TeXView> {
   @override
   void initState() {
     TeXRenderingServer.onTeXViewRenderedCallback = (_) async {
-      final height =
-          double.parse((await _webViewControllerPlus.webViewHeight).toString());
+      final double height = await _webViewControllerPlus.webViewHeight;
       if (_teXViewHeight != height && mounted) {
         setState(() {
           _teXViewHeight = height;

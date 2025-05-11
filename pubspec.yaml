@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
     
-  webview_flutter_plus: ^0.4.16
+  webview_flutter_plus: ^0.4.17
   flutter_svg: ^2.1.0
   url_launcher: ^6.3.1
   markdown: ^7.3.0
@@ -28,7 +28,6 @@ dev_dependencies:
 flutter:
   assets:
     - packages/flutter_tex/core/mathjax_core.js
-    - packages/flutter_tex/core/mathjax_lite_dom.js
     - packages/flutter_tex/core/flutter_tex.js
     - packages/flutter_tex/core/flutter_tex.css
     - packages/flutter_tex/core/flutter_tex.html

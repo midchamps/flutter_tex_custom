@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/default_svg_widget.dart';
 
-@JS('teX2SVG')
+@JS('flutterTeXLiteDOM.teX2SVG')
 external String teX2SVG(String math, String inputType);
 
 class TeX2SVGState extends State<TeX2SVG> {
