@@ -43,9 +43,8 @@ require('mathjax-full/components/src/output/svg/svg.js');
 //
 require('mathjax-full/components/src/startup/startup.js');
 
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 const { mathjax } = require('mathjax-full/js/mathjax.js');
 const { liteAdaptor } = require('mathjax-full/js/adaptors/liteAdaptor.js');
@@ -55,7 +54,6 @@ const { MathML } = require('mathjax-full/js/input/mathml.js');
 const { AsciiMath } = require('mathjax-full/js/input/asciimath.js');
 const { SVG } = require('mathjax-full/js/output/svg.js');
 const { AllPackages } = require('mathjax-full/js/input/tex/AllPackages.js');
-
 
 
 class FlutterTeXLiteDOM {

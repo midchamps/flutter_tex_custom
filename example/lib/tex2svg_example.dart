@@ -91,6 +91,43 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
               ],
             ),
           ),
+          Divider(
+            height: 20,
+            color: Colors.transparent,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 4),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Matrix",
+                    style: baseStyle.copyWith(
+                      fontSize: fontSize * 1.5,
+                      color: Colors.black,
+                    )),
+                TeX2SVG(
+                  math: r""" \begin{bmatrix}
+                              a & b \\
+                              c & d
+                            \end{bmatrix}""",
+                  formulaWidgetBuilder: (context, svg) {
+                    double displayFontSize = fontSize * 3;
+                    return SvgPicture.string(
+                      svg,
+                      height: displayFontSize,
+                      width: displayFontSize,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

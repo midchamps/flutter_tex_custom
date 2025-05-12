@@ -5,7 +5,7 @@ import 'package:flutter_tex/src/tex_view/tex_view_mobile.dart'
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatefulWidget {
-  /// A list of TeXViewChild.
+  /// A list of [TeXViewWidget]s.
   final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
@@ -13,6 +13,9 @@ class TeXView extends StatefulWidget {
 
   /// Register fonts.
   final List<TeXViewFont>? fonts;
+
+  /// Height offset to be added to the rendered height.
+  final double heightOffset;
 
   /// Show a loading widget before rendering completes.
   final Widget Function(BuildContext context)? loadingWidgetBuilder;
@@ -25,6 +28,7 @@ class TeXView extends StatefulWidget {
     required this.child,
     this.fonts,
     this.style,
+    this.heightOffset = 5.0,
     this.loadingWidgetBuilder,
     this.onRenderFinished,
   });

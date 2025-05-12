@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
@@ -10,42 +12,46 @@ class TeXViewState extends State<TeXView> {
   double _teXViewHeight = initialHeight;
   String _lastRawData = "";
 
+  StreamController<double> streamController = StreamController();
+
   @override
   void initState() {
-    TeXRenderingServer.onTeXViewRenderedCallback = (_) async {
-      final double height = await _webViewControllerPlus.webViewHeight;
-      if (_teXViewHeight != height && mounted) {
-        setState(() {
-          _teXViewHeight = height;
-        });
-        widget.onRenderFinished?.call(_teXViewHeight);
-      }
-    };
-
     TeXRenderingServer.onTapCallback =
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
+
+    TeXRenderingServer.onTeXViewRenderedCallback = (h) async {
+      // var h = await _webViewControllerPlus.webViewHeight;
+      streamController.add(double.parse(h.toString()) + widget.heightOffset);
+      // if (_teXViewHeight != height && mounted) {
+      //   setState(() {
+      //     _teXViewHeight = height;
+      //   });
+      //   widget.onRenderFinished?.call(_teXViewHeight);
+      // }
+    };
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _renderTeXView();
-    return IndexedStack(
-      index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _teXViewHeight == initialHeight
-              ? 1
-              : 0
-          : 0,
-      children: <Widget>[
-        SizedBox(
-          height: _teXViewHeight,
-          child: WebViewWidget(
-            controller: _webViewControllerPlus,
-          ),
-        ),
-        widget.loadingWidgetBuilder?.call(context) ?? const SizedBox.shrink()
-      ],
-    );
+    return StreamBuilder<double>(
+        stream: streamController.stream,
+        builder: (context, snap) {
+          if (snap.hasData && !snap.hasError) {
+            double height = snap.data ?? _teXViewHeight;
+            return SizedBox(
+              height: height,
+              child: WebViewWidget(
+                controller: _webViewControllerPlus,
+              ),
+            );
+          } else {
+            return widget.loadingWidgetBuilder?.call(context) ??
+                const SizedBox.shrink();
+          }
+        });
   }
 
   void _renderTeXView() async {

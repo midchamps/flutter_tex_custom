@@ -126,7 +126,7 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                       .options
                       .map((QuizOption option) {
                     return TeXViewGroupItem(
-                        rippleEffect: false,
+                        rippleEffect: true,
                         id: option.id,
                         child: TeXViewDocument(option.option,
                             style: const TeXViewStyle(
@@ -158,11 +158,11 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
               ),
               backgroundColor: Colors.white,
             ),
-            loadingWidgetBuilder: (context) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+            // loadingWidgetBuilder: (context) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // },
           ),
           if (isWrong)
             const Padding(

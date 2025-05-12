@@ -6,10 +6,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 /// A rendering server for TeXView. This is backed by a [LocalhostServer] and a [WebViewControllerPlus].
-/// Make sure to call [run] before using the [webViewControllerPlus].
+/// Make sure to call [start] before using the [TeXRenderingServer].
 class TeXRenderingServer {
   static final WebViewControllerPlus webViewControllerPlus =
       WebViewControllerPlus();
+
   static final LocalhostServer _server = LocalhostServer();
 
   static RenderingEngineCallback? onPageFinished,
@@ -17,7 +18,9 @@ class TeXRenderingServer {
       onTeXViewRenderedCallback;
 
   static Future<void> start(
-      {int port = 0, Map mathJaxConfig = const {}}) async {
+      {int port = 0,
+      Color backgroundColor = Colors.transparent,
+      Map mathJaxConfig = const {}}) async {
     var controllerCompleter = Completer<void>();
 
     await _server.start(port: port);
@@ -43,7 +46,8 @@ class TeXRenderingServer {
           },
           onNavigationRequest: (request) {
             if (request.url.contains(
-                "http://localhost:${_server.port}/packages/flutter_tex/core/flutter_tex.html")) {
+              "http://localhost:${_server.port}/packages/flutter_tex/core/flutter_tex.html",
+            )) {
               return NavigationDecision.navigate;
             } else {
               _launchURL(request.url);
@@ -58,7 +62,7 @@ class TeXRenderingServer {
         },
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.transparent)
+      ..setBackgroundColor(backgroundColor)
       ..loadFlutterAssetWithServer(
           "packages/flutter_tex/core/flutter_tex.html", _server.port!);
 

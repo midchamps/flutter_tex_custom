@@ -59,7 +59,7 @@ class TeXViewState extends State<TeXView> {
   }
 
   void onTeXViewRendered(JSNumber message) {
-    double viewHeight = double.parse(message.toString());
+    double viewHeight = double.parse(message.toString()) + widget.heightOffset;
     if (viewHeight != _teXViewHeight && mounted) {
       setState(() {
         _teXViewHeight = viewHeight;
