@@ -8,7 +8,8 @@
 - [Contents](#contents)
 - [About](#about)
 - [How it works?](#how-it-works)
-- [Web Demo: https://flutter-tex.web.app](#web-demo-httpsflutter-texwebapp)
+- [Web Demo:](#web-demo)
+  - [https://flutter-tex.web.app](#httpsflutter-texwebapp)
 - [Application Demo:](#application-demo)
 - [Demo Video: Click to Watch Demo on Youtube](#demo-video-click-to-watch-demo-on-youtube)
 - [Screenshots:](#screenshots)
@@ -61,7 +62,8 @@ A [MathJax](https://github.com/mathjax/MathJax) based Flutter Package, to render
 Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credit goes to [MathJax](https://github.com/mathjax/MathJax) developers.
 
 
-# Web Demo: [https://flutter-tex.web.app](https://flutter-tex.web.app)
+# Web Demo:
+## [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 
 # Application Demo:
@@ -88,7 +90,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.4
+  flutter_tex: ^5.0.5
 ``` 
 
 **2:** You can install packages from the command line:
@@ -175,8 +177,8 @@ For Web support modify `<project-directory>/web/index.html` like this.
 <head>
     ...
     ...
-    <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
-    <script src="assets/packages/flutter_tex/core/mathjax_lite_dom.js"></script>
+  <script src="assets/packages/flutter_tex/core/mathjax_core.js"></script>
+  <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
 </head>
 ```
 

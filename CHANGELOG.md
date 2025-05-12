@@ -1,6 +1,11 @@
+## [5.0.5] - May 12, 2025
+* Issue [#210](https://github.com/Shahxad-Akram/flutter_tex/issues/210) fixed.
+* Minor changes in web implementation, see the docs.
+* Code optimizations.
+
 ## [5.0.4] - May 09, 2025
 * Minor fix.
-
+  
 ## [5.0.3] - May 06, 2025
 * `TeXWidget` renamed ot `TeX2SVG`
 

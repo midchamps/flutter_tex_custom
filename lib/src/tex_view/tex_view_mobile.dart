@@ -8,11 +8,10 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 class TeXViewState extends State<TeXView> {
   final WebViewControllerPlus _webViewControllerPlus =
       TeXRenderingServer.webViewControllerPlus;
+  final StreamController<double> heightStreamController = StreamController();
 
   double _teXViewHeight = initialHeight;
   String _lastRawData = "";
-
-  StreamController<double> streamController = StreamController();
 
   @override
   void initState() {
@@ -20,8 +19,10 @@ class TeXViewState extends State<TeXView> {
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
     TeXRenderingServer.onTeXViewRenderedCallback = (h) async {
+      heightStreamController
+          .add(double.parse(h.toString()) + widget.heightOffset);
+
       // var h = await _webViewControllerPlus.webViewHeight;
-      streamController.add(double.parse(h.toString()) + widget.heightOffset);
       // if (_teXViewHeight != height && mounted) {
       //   setState(() {
       //     _teXViewHeight = height;
@@ -37,7 +38,7 @@ class TeXViewState extends State<TeXView> {
   Widget build(BuildContext context) {
     _renderTeXView();
     return StreamBuilder<double>(
-        stream: streamController.stream,
+        stream: heightStreamController.stream,
         builder: (context, snap) {
           if (snap.hasData && !snap.hasError) {
             double height = snap.data ?? _teXViewHeight;
@@ -52,6 +53,14 @@ class TeXViewState extends State<TeXView> {
                 const SizedBox.shrink();
           }
         });
+  }
+
+  @override
+  void dispose() {
+    if (mounted) {
+      heightStreamController.close();
+    }
+    super.dispose();
   }
 
   void _renderTeXView() async {

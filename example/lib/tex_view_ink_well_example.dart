@@ -13,7 +13,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
     margin: TeXViewMargin.all(10),
     padding: TeXViewPadding.all(10),
     borderRadius: TeXViewBorderRadius.all(10),
-    overflow: TeXViewOverflow.auto,
+    overflow: TeXViewOverflow.hidden,
     border: TeXViewBorder.all(
       TeXViewBorderDecoration(
           borderColor: Colors.blue,

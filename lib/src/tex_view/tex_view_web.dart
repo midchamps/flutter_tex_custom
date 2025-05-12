@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:js_interop';
 import 'dart:ui_web';
 import 'package:flutter/material.dart';
@@ -22,20 +23,25 @@ class TeXViewState extends State<TeXView> {
     ..style.width = '100%'
     ..style.border = '0';
 
-  double _teXViewHeight = initialHeight;
+  final StreamController<double> heightStreamController = StreamController();
+
   String _lastRawData = '';
   bool _isReady = false;
 
   @override
   Widget build(BuildContext context) {
     _renderTeXView();
-    return SizedBox(
-      height: _teXViewHeight,
-      child: HtmlElementView(
-        key: widget.key ?? ValueKey(_viewId),
-        viewType: _viewId,
-      ),
-    );
+    return StreamBuilder<double>(
+        stream: heightStreamController.stream,
+        builder: (context, snap) {
+          return SizedBox(
+            height: snap.data ?? initialHeight,
+            child: HtmlElementView(
+              key: widget.key ?? ValueKey(_viewId),
+              viewType: _viewId,
+            ),
+          );
+        });
   }
 
   @override
@@ -44,10 +50,8 @@ class TeXViewState extends State<TeXView> {
 
     platformViewRegistry.registerViewFactory(
         _viewId, (int id) => iframeElement);
-
     teXViewRenderedCallback = onTeXViewRendered.toJS;
     onTapCallback = onTap.toJS;
-
     _isReady = true;
     _renderTeXView();
 
@@ -59,12 +63,22 @@ class TeXViewState extends State<TeXView> {
   }
 
   void onTeXViewRendered(JSNumber message) {
-    double viewHeight = double.parse(message.toString()) + widget.heightOffset;
-    if (viewHeight != _teXViewHeight && mounted) {
-      setState(() {
-        _teXViewHeight = viewHeight;
-      });
+    heightStreamController
+        .add(double.parse(message.toString()) + widget.heightOffset);
+
+    // if (viewHeight != _teXViewHeight && mounted) {
+    //   setState(() {
+    //     _teXViewHeight = viewHeight;
+    //   });
+    // }
+  }
+
+  @override
+  void dispose() {
+    if (mounted) {
+      heightStreamController.close();
     }
+    super.dispose();
   }
 
   void _renderTeXView() {
