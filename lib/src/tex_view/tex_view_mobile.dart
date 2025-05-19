@@ -2,33 +2,40 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/tex_server/tex_rendering_controller.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> {
-  final WebViewControllerPlus _webViewControllerPlus =
-      TeXRenderingServer.webViewControllerPlus;
+  late final TeXRenderingController teXRenderingController;
+
   final StreamController<double> heightStreamController = StreamController();
 
+  bool _isControllerReady = false;
   double _teXViewHeight = initialHeight;
   String _lastRawData = "";
 
   @override
   void initState() {
-    TeXRenderingServer.onTapCallback =
+    if (TeXRenderingServer.multiTeXView) {
+      teXRenderingController = TeXRenderingController();
+      teXRenderingController.initWebViewControllerPlus();
+      teXRenderingController.onPageFinishedCallback =
+          (pageFinishedCallbackMessage) {
+        _onControllerReady();
+      };
+    } else {
+      teXRenderingController = TeXRenderingServer.teXRenderingController;
+      _onControllerReady();
+    }
+
+    teXRenderingController.onTapCallback =
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
-    TeXRenderingServer.onTeXViewRenderedCallback = (h) async {
-      heightStreamController
-          .add(double.parse(h.toString()) + widget.heightOffset);
-
-      // var h = await _webViewControllerPlus.webViewHeight;
-      // if (_teXViewHeight != height && mounted) {
-      //   setState(() {
-      //     _teXViewHeight = height;
-      //   });
-      //   widget.onRenderFinished?.call(_teXViewHeight);
-      // }
+    teXRenderingController.onTeXViewRenderedCallback = (h) async {
+      double height = double.parse(h.toString()) + widget.heightOffset;
+      heightStreamController.add(height);
+      widget.onRenderFinished?.call(height);
     };
 
     super.initState();
@@ -45,7 +52,7 @@ class TeXViewState extends State<TeXView> {
             return SizedBox(
               height: height,
               child: WebViewWidget(
-                controller: _webViewControllerPlus,
+                controller: teXRenderingController.webViewControllerPlus,
               ),
             );
           } else {
@@ -63,11 +70,16 @@ class TeXViewState extends State<TeXView> {
     super.dispose();
   }
 
+  void _onControllerReady() {
+    _isControllerReady = true;
+    _renderTeXView();
+  }
+
   void _renderTeXView() async {
     var currentRawData = getRawData(widget);
-    if (currentRawData != _lastRawData) {
+    if (currentRawData != _lastRawData && _isControllerReady) {
       if (widget.loadingWidgetBuilder != null) _teXViewHeight = initialHeight;
-      await _webViewControllerPlus
+      await teXRenderingController.webViewControllerPlus
           .runJavaScript("initTeXView($currentRawData);");
       _lastRawData = currentRawData;
     }
