@@ -90,7 +90,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.5
+  flutter_tex: ^5.0.6
 ``` 
 
 **2:** You can install packages from the command line:
