@@ -13,9 +13,7 @@ class TeXRenderingController {
       onTapCallback,
       onTeXViewRenderedCallback;
 
-  Future<WebViewControllerPlus> initWebViewControllerPlus() {
-    var port = TeXRenderingServer.port;
-
+  Future<WebViewControllerPlus> initController() {
     var controllerCompleter = Completer<WebViewControllerPlus>();
 
     webViewControllerPlus
@@ -39,7 +37,7 @@ class TeXRenderingController {
           },
           onNavigationRequest: (request) {
             if (request.url.contains(
-              "http://localhost:$port/packages/flutter_tex/core/flutter_tex.html",
+              "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html",
             )) {
               return NavigationDecision.navigate;
             } else {
@@ -56,8 +54,8 @@ class TeXRenderingController {
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.transparent)
-      ..loadFlutterAssetWithServer(
-          "packages/flutter_tex/core/flutter_tex.html", port!);
+      ..loadFlutterAssetWithServer("packages/flutter_tex/core/flutter_tex.html",
+          TeXRenderingServer.port!);
 
     return controllerCompleter.future;
   }

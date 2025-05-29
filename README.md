@@ -20,6 +20,7 @@
 - [How to use?](#how-to-use)
     - [TeX2SVG Example](#tex2svg-example)
     - [TeXView Example](#texview-example)
+- [MathJax Configurations](#mathjax-configurations)
 - [Examples](#examples)
     - [TeX2SVG Example](#tex2svg-example-1)
       - [TeX2SVG Example](#tex2svg-example-2)
@@ -90,7 +91,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.6
+  flutter_tex: ^5.0.7
 ``` 
 
 **2:** You can install packages from the command line:
@@ -349,6 +350,33 @@ TeXView(
     ),
    );
 ```
+
+# MathJax Configurations
+To use custom MathJax configuration create a file with the exact name `mathjax_config.js` in your app assets root e.g. an example file.
+
+```js
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    },
+    svg: {
+        fontCache: 'global'
+    }
+};
+```
+
+and make sure to add this into `pubspec.yaml` like:
+
+```yaml
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/mathjax_config.js
+```
+
+For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/latest/basic/mathjax.html)
+
 
 # Examples
 

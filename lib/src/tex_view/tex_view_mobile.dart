@@ -11,7 +11,7 @@ class TeXViewState extends State<TeXView> {
 
   final StreamController<double> heightStreamController = StreamController();
 
-  bool _isControllerReady = false;
+  bool _isReady = false;
   double _teXViewHeight = initialHeight;
   String _lastRawData = "";
 
@@ -19,7 +19,7 @@ class TeXViewState extends State<TeXView> {
   void initState() {
     if (TeXRenderingServer.multiTeXView) {
       teXRenderingController = TeXRenderingController();
-      teXRenderingController.initWebViewControllerPlus();
+      teXRenderingController.initController();
       teXRenderingController.onPageFinishedCallback =
           (pageFinishedCallbackMessage) {
         _onControllerReady();
@@ -71,13 +71,17 @@ class TeXViewState extends State<TeXView> {
   }
 
   void _onControllerReady() {
-    _isControllerReady = true;
+    _isReady = true;
     _renderTeXView();
   }
 
   void _renderTeXView() async {
+    if (!_isReady) {
+      return;
+    }
+
     var currentRawData = getRawData(widget);
-    if (currentRawData != _lastRawData && _isControllerReady) {
+    if (currentRawData != _lastRawData) {
       if (widget.loadingWidgetBuilder != null) _teXViewHeight = initialHeight;
       await teXRenderingController.webViewControllerPlus
           .runJavaScript("initTeXView($currentRawData);");

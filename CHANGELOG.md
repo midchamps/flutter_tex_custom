@@ -1,3 +1,6 @@
+## [5.0.7] - May 29, 2025
+* MathJax custom configuration implementation, see the docs.
+
 ## [5.0.6] - May 19, 2025
 * Multi TeXView Support added
 

@@ -29,27 +29,9 @@ class TeXViewState extends State<TeXView> {
   bool _isReady = false;
 
   @override
-  Widget build(BuildContext context) {
-    _renderTeXView();
-    return StreamBuilder<double>(
-        stream: heightStreamController.stream,
-        builder: (context, snap) {
-          return SizedBox(
-            height: snap.data ?? initialHeight,
-            child: HtmlElementView(
-              key: widget.key ?? ValueKey(_viewId),
-              viewType: _viewId,
-            ),
-          );
-        });
-  }
-
-  @override
   void initState() {
-    iframeElement.id = _viewId;
-
     platformViewRegistry.registerViewFactory(
-        _viewId, (int id) => iframeElement);
+        _viewId, (int id) => iframeElement..id = _viewId);
     teXViewRenderedCallback = onTeXViewRendered.toJS;
     onTapCallback = onTap.toJS;
     _isReady = true;
@@ -58,19 +40,29 @@ class TeXViewState extends State<TeXView> {
     super.initState();
   }
 
-  void onTap(JSString id) {
-    widget.child.onTapCallback(id.toString());
+  @override
+  Widget build(BuildContext context) {
+    _renderTeXView();
+    return StreamBuilder<double>(
+        stream: heightStreamController.stream,
+        builder: (context, snap) {
+          return SizedBox(
+            height: snap.hasData ? snap.data! : initialHeight,
+            child: HtmlElementView(
+              key: widget.key ?? ValueKey(_viewId),
+              viewType: _viewId,
+            ),
+          );
+        });
   }
 
-  void onTeXViewRendered(JSNumber message) {
-    heightStreamController
-        .add(double.parse(message.toString()) + widget.heightOffset);
+  void onTap(JSString id) => widget.child.onTapCallback(id.toString());
 
-    // if (viewHeight != _teXViewHeight && mounted) {
-    //   setState(() {
-    //     _teXViewHeight = viewHeight;
-    //   });
-    // }
+  void onTeXViewRendered(JSNumber h) {
+    double height = double.parse(h.toString()) + widget.heightOffset;
+
+    heightStreamController.add(height);
+    widget.onRenderFinished?.call(height);
   }
 
   @override
