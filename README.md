@@ -59,7 +59,7 @@ A [MathJax](https://github.com/mathjax/MathJax) based Flutter Package, to render
 
 # How it works?
 
-Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter](https://pub.dartlang.org/packages/webview_flutter). All credit goes to [MathJax](https://github.com/mathjax/MathJax) developers.
+Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.com/mathjax/MathJax) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus). All credit goes to [MathJax](https://github.com/mathjax/MathJax) developers.
 
 
 # Web Demo:
@@ -90,7 +90,7 @@ Flutter TeX is a port to a powerful JavaScript library [MathJax](https://github.
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.8
+  flutter_tex: ^5.0.9
 ``` 
 
 **2:** You can install packages from the command line:
@@ -431,4 +431,4 @@ For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/lat
 For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
 # Limitations:
-- Please avoid using too many `TeXView`s in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).
+- Please avoid using too many `TeXView`s in a single page, because this is based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).

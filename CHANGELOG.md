@@ -1,4 +1,7 @@
-## [5.0.8] - May 29, 2025
+## [5.0.9] - June 05, 2025
+* `TeXViewGroup` and `TeXViewGroupItem` have been deprecated see the [Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
+
+## [5.0.8] - June 05, 2025
 * `TeXViewGroup` and `TeXViewGroupItem` have been deprecated see the [Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
 
 ## [5.0.7] - May 29, 2025

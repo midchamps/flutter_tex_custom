@@ -4,17 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXRenderingController {
-  final WebViewController webViewControllerPlus = WebViewController();
+  final WebViewControllerPlus webViewControllerPlus = WebViewControllerPlus();
 
   RenderingControllerCallback? onPageFinishedCallback,
       onTapCallback,
       onTeXViewRenderedCallback;
 
-  Future<WebViewController> initController() {
-    var controllerCompleter = Completer<WebViewController>();
+  Future<WebViewControllerPlus> initController() {
+    var controllerCompleter = Completer<WebViewControllerPlus>();
 
     var baseUrl =
         "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html";
