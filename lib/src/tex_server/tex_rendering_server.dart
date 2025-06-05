@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_tex/src/tex_server/localhost_server.dart';
 import 'package:flutter_tex/src/tex_server/tex_rendering_controller.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 /// A rendering server for TeXView. This is backed by a [LocalhostServer] and a [WebViewControllerPlus].
 /// Make sure to call [start] before using the [TeXRenderingServer].

@@ -4,6 +4,8 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/widget_meta.dart';
 import 'package:flutter_tex/src/tex_view/utils/style_utils.dart';
 
+@Deprecated(
+    'It will be removed soon. See the quiz example: https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart')
 class TeXViewGroup extends TeXViewWidget {
   /// A list of [TeXViewWidget].
   final List<TeXViewGroupItem> children;
@@ -25,10 +27,13 @@ class TeXViewGroup extends TeXViewWidget {
 
   final bool single;
 
+  final String? selected;
+
   const TeXViewGroup(
       {required this.children,
       required this.onTap,
       this.style,
+      this.selected,
       this.selectedItemStyle,
       this.normalItemStyle})
       : onItemsSelection = null,
@@ -38,6 +43,7 @@ class TeXViewGroup extends TeXViewWidget {
       {required this.children,
       required this.onItemsSelection,
       this.style,
+      this.selected,
       this.selectedItemStyle,
       this.normalItemStyle})
       : onTap = null,
@@ -66,6 +72,7 @@ class TeXViewGroup extends TeXViewWidget {
         'data': children.map((child) => child.toJson()).toList(),
         'single': single,
         'style': style?.initStyle() ?? teXViewDefaultStyle,
+        'selected': selected,
         'selectedItemStyle':
             selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
         'normalItemStyle': normalItemStyle?.initStyle() ?? teXViewDefaultStyle,

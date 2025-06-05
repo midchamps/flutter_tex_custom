@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_server/tex_rendering_controller.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXViewState extends State<TeXView> {
   late final TeXRenderingController teXRenderingController;

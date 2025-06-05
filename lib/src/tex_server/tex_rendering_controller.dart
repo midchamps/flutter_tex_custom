@@ -4,17 +4,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXRenderingController {
-  final WebViewControllerPlus webViewControllerPlus = WebViewControllerPlus();
+  final WebViewController webViewControllerPlus = WebViewController();
 
   RenderingControllerCallback? onPageFinishedCallback,
       onTapCallback,
       onTeXViewRenderedCallback;
 
-  Future<WebViewControllerPlus> initController() {
-    var controllerCompleter = Completer<WebViewControllerPlus>();
+  Future<WebViewController> initController() {
+    var controllerCompleter = Completer<WebViewController>();
+
+    var baseUrl =
+        "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html";
 
     webViewControllerPlus
       ..addJavaScriptChannel(
@@ -37,7 +40,7 @@ class TeXRenderingController {
           },
           onNavigationRequest: (request) {
             if (request.url.contains(
-              "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html",
+              baseUrl,
             )) {
               return NavigationDecision.navigate;
             } else {
@@ -54,13 +57,14 @@ class TeXRenderingController {
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.transparent)
-      ..loadFlutterAssetWithServer("packages/flutter_tex/core/flutter_tex.html",
-          TeXRenderingServer.port!);
+      ..loadRequest(Uri.parse(
+        baseUrl,
+      ));
 
     return controllerCompleter.future;
   }
 
-  static _launchURL(String url) async {
+  static void _launchURL(String url) async {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {

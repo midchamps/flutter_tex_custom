@@ -5,18 +5,33 @@ class Quiz {
   final String statement;
   final List<QuizOption> options;
   final String correctOptionId;
+  String? selectedOptionId;
 
   Quiz(
       {required this.statement,
       required this.options,
-      required this.correctOptionId});
+      required this.correctOptionId,
+      this.selectedOptionId});
 }
 
 class QuizOption {
   final String id;
   final String option;
+  TeXViewStyle? style;
 
-  QuizOption(this.id, this.option);
+  QuizOption(this.id, this.option,
+      {this.style = const TeXViewStyle(
+        margin: TeXViewMargin.all(3),
+        padding: TeXViewPadding.all(3),
+        borderRadius: TeXViewBorderRadius.all(10),
+        overflow: TeXViewOverflow.hidden,
+        border: TeXViewBorder.all(
+          TeXViewBorderDecoration(
+              borderColor: Colors.grey,
+              borderStyle: TeXViewBorderStyle.solid,
+              borderWidth: 2),
+        ),
+      )});
 }
 
 class TeXViewQuizExample extends StatefulWidget {
@@ -28,7 +43,7 @@ class TeXViewQuizExample extends StatefulWidget {
 
 class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
   int currentQuizIndex = 0;
-  String selectedOptionId = "";
+  // String selectedId = "";
   bool isWrong = false;
 
   List<Quiz> quizList = [
@@ -101,6 +116,32 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
     ),
   ];
 
+  final TeXViewStyle _teXViewStyleNormal = const TeXViewStyle(
+    margin: TeXViewMargin.all(3),
+    padding: TeXViewPadding.all(3),
+    borderRadius: TeXViewBorderRadius.all(10),
+    overflow: TeXViewOverflow.hidden,
+    border: TeXViewBorder.all(
+      TeXViewBorderDecoration(
+          borderColor: Colors.grey,
+          borderStyle: TeXViewBorderStyle.solid,
+          borderWidth: 2),
+    ),
+  );
+
+  final TeXViewStyle _teXViewStyleSelected = const TeXViewStyle(
+    margin: TeXViewMargin.all(3),
+    padding: TeXViewPadding.all(3),
+    borderRadius: TeXViewBorderRadius.all(10),
+    overflow: TeXViewOverflow.hidden,
+    border: TeXViewBorder.all(
+      TeXViewBorderDecoration(
+          borderColor: Colors.blue,
+          borderStyle: TeXViewBorderStyle.solid,
+          borderWidth: 4),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,33 +159,37 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
           ),
           TeXView(
             child: TeXViewColumn(children: [
-              TeXViewDocument(quizList[currentQuizIndex].statement,
-                  style:
-                      const TeXViewStyle(textAlign: TeXViewTextAlign.center)),
-              TeXViewGroup(
-                  children: quizList[currentQuizIndex]
-                      .options
-                      .map((QuizOption option) {
-                    return TeXViewGroupItem(
-                        rippleEffect: true,
-                        id: option.id,
-                        child: TeXViewDocument(option.option,
-                            style: const TeXViewStyle(
-                                padding: TeXViewPadding.all(10))));
-                  }).toList(),
-                  selectedItemStyle: TeXViewStyle(
-                      borderRadius: const TeXViewBorderRadius.all(10),
-                      border: TeXViewBorder.all(TeXViewBorderDecoration(
-                          borderWidth: 3, borderColor: Colors.green[900])),
-                      margin: const TeXViewMargin.all(10)),
-                  normalItemStyle:
-                      const TeXViewStyle(margin: TeXViewMargin.all(10)),
+              TeXViewDocument(
+                quizList[currentQuizIndex].statement,
+                style: const TeXViewStyle(
+                  textAlign: TeXViewTextAlign.center,
+                  padding: TeXViewPadding.only(bottom: 10),
+                ),
+              ),
+              ...quizList[currentQuizIndex].options.map((QuizOption option) {
+                return TeXViewInkWell(
+                  rippleEffect: true,
+                  id: option.id,
+                  child: TeXViewDocument(
+                    option.option,
+                    style: const TeXViewStyle(
+                      padding: TeXViewPadding.all(10),
+                    ),
+                  ),
+                  style: option.style,
                   onTap: (id) {
-                    selectedOptionId = id;
                     setState(() {
                       isWrong = false;
+                      quizList[currentQuizIndex].selectedOptionId = id;
+
+                      for (var element in quizList[currentQuizIndex].options) {
+                        element.style = _teXViewStyleNormal;
+                      }
+                      option.style = _teXViewStyleSelected;
                     });
-                  })
+                  },
+                );
+              }),
             ]),
             style: const TeXViewStyle(
               margin: TeXViewMargin.all(5),
@@ -158,11 +203,6 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
               ),
               backgroundColor: Colors.white,
             ),
-            // loadingWidgetBuilder: (context) {
-            //   return const Center(
-            //     child: CircularProgressIndicator(),
-            //   );
-            // },
           ),
           if (isWrong)
             const Padding(
@@ -182,7 +222,6 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                 onPressed: () {
                   setState(() {
                     if (currentQuizIndex > 0) {
-                      selectedOptionId = "";
                       currentQuizIndex--;
                     }
                   });
@@ -192,9 +231,8 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    if (selectedOptionId ==
+                    if (quizList[currentQuizIndex].selectedOptionId ==
                         quizList[currentQuizIndex].correctOptionId) {
-                      selectedOptionId = "";
                       if (currentQuizIndex != quizList.length - 1) {
                         currentQuizIndex++;
                       }

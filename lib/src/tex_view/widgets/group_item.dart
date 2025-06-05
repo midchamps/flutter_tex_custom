@@ -1,6 +1,8 @@
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/widget_meta.dart';
 
+@Deprecated(
+    'It will be removed soon. See the quiz example: https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart')
 class TeXViewGroupItem implements TeXViewWidget {
   final String id;
 
