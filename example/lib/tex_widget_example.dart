@@ -76,8 +76,8 @@ class TeXWidgetExamples extends StatelessWidget {
                     double displayFontSize = 16;
                     return SvgPicture.string(
                       svg,
-                      colorFilter:
-                          const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(
+                          Colors.purple, BlendMode.srcIn),
                       height: displayFontSize,
                       width: displayFontSize,
                       fit: BoxFit.contain,
