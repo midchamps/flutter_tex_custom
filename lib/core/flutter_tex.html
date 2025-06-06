@@ -54,7 +54,7 @@
         function renderTeXView(onCompleteCallback) {
             MathJax.typesetPromise(["#TeXView"]).then(() => {
                 onCompleteCallback();
-                console.log("MathJax typesetting complete");
+                console.log("MathJax typesetting complete.");
             }).catch((err) => {
                 console.error("Error during MathJax typesetting:", err);
             });

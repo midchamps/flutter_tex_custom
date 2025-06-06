@@ -84,7 +84,7 @@ class TeXViewState extends State<TeXView> {
     if (currentRawData != _lastRawData) {
       if (widget.loadingWidgetBuilder != null) _teXViewHeight = initialHeight;
       await teXRenderingController.webViewControllerPlus
-          .runJavaScript("initTeXView($currentRawData);");
+          .runJavaScript('initTeXViewMobile($currentRawData);');
       _lastRawData = currentRawData;
     }
   }

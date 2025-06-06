@@ -12,8 +12,8 @@ external set teXViewRenderedCallback(JSFunction callback);
 @JS('OnTapCallback')
 external set onTapCallback(JSFunction callback);
 
-@JS('initWebTeXView')
-external void initWebTeXView(String viewId, String rawData);
+@JS('initTeXViewWeb')
+external void initTeXViewWeb(String viewId, String rawData);
 
 class TeXViewState extends State<TeXView> {
   final String _viewId = UniqueKey().toString();
@@ -36,7 +36,6 @@ class TeXViewState extends State<TeXView> {
     onTapCallback = onTap.toJS;
     _isReady = true;
     _renderTeXView();
-
     super.initState();
   }
 
@@ -79,7 +78,7 @@ class TeXViewState extends State<TeXView> {
     }
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
-      initWebTeXView(_viewId, currentRawData);
+      initTeXViewWeb(_viewId, currentRawData);
       _lastRawData = currentRawData;
     }
   }

@@ -8,10 +8,10 @@
 - [Contents](#contents)
 - [About](#about)
 - [How it works?](#how-it-works)
-- [Web Demo:](#web-demo)
-- [Application Demo:](#application-demo)
-- [Demo Video:](#demo-video)
-- [Screenshots:](#screenshots)
+- [Web Demo](#web-demo)
+- [Application Demo](#application-demo)
+- [Demo Video](#demo-video)
+- [Screenshots](#screenshots)
 - [How to setup?](#how-to-setup)
     - [Android](#android)
     - [iOS](#ios)
@@ -22,8 +22,8 @@
     - [TeXView](#texview)
 - [MathJax Configurations](#mathjax-configurations)
 - [More Examples](#more-examples)
-- [Api Changes:](#api-changes)
-- [Api Usage (TeXView):](#api-usage-texview)
+- [Api Changes](#api-changes)
+- [Api Usage (TeXView)](#api-usage-texview)
 - [Limitations:](#limitations)
 
 # About
@@ -45,17 +45,17 @@ The rendering itself is handled within a [webview_flutter_plus](https://pub.dart
 We extend our sincere credit to the original [MathJax](https://github.com/mathjax/MathJax) developers, whose work is the foundation of this package.
 
 
-# Web Demo:
+# Web Demo
 - ## [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 
-# Application Demo:
+# Application Demo
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-# Demo Video:
+# Demo Video
 - ## [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
 
-# Screenshots:
+# Screenshots
  |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
  | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
  | <img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/> |
@@ -403,11 +403,12 @@ For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/lat
 - ### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
 
 
-# Api Changes:
+# Api Changes
 * Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
 
-# Api Usage (TeXView):
-- `children:` A list of `TeXViewWidget`
+# Api Usage (TeXView)
+- `children` A list of `TeXViewWidget`
+- `heightOffset` Height offset to be added to the rendered height.
 
 - **`TeXViewWidget`**
     - `TeXViewDocument` Holds TeX data by using a raw string e.g. `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put HTML and Javascript code in it.
@@ -422,9 +423,9 @@ For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/lat
 - `TeXViewStyle()` You can style each and everything using `TeXViewStyle()` or by using custom `CSS` code by `TeXViewStyle.fromCSS()` where you can pass hard coded String containing CSS code. For more information please check the example.
     
 
-- `loadingWidgetBuilder:` Show a loading widget before rendering completes.
+- `loadingWidgetBuilder` Shows a loading widget before rendering completes.
 
-- `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
+- `onRenderFinished` Callback with the rendered page height, when TEX rendering finishes.
 
 For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
