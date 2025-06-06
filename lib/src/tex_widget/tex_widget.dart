@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TeXWidget extends StatefulWidget {
-  const TeXWidget({super.key});
+  final String math;
+
+  const TeXWidget({super.key, required this.math});
 
   @override
   State<TeXWidget> createState() => _TeXWidgetState();

@@ -14,24 +14,51 @@ class Quiz {
       this.selectedOptionId});
 }
 
+const TeXViewStyle quizItemStyleNormal = TeXViewStyle(
+  margin: TeXViewMargin.all(7),
+  padding: TeXViewPadding.all(2),
+  borderRadius: TeXViewBorderRadius.all(10),
+  overflow: TeXViewOverflow.hidden,
+  border: TeXViewBorder.all(
+    TeXViewBorderDecoration(
+        borderColor: Colors.grey,
+        borderStyle: TeXViewBorderStyle.solid,
+        borderWidth: 2),
+  ),
+);
+
+const TeXViewStyle quizItemStyleError = TeXViewStyle(
+  margin: TeXViewMargin.all(7),
+  padding: TeXViewPadding.all(2),
+  borderRadius: TeXViewBorderRadius.all(10),
+  overflow: TeXViewOverflow.hidden,
+  border: TeXViewBorder.all(
+    TeXViewBorderDecoration(
+        borderColor: Colors.red,
+        borderStyle: TeXViewBorderStyle.solid,
+        borderWidth: 5),
+  ),
+);
+
+const TeXViewStyle quizItemStyleCorrect = TeXViewStyle(
+  margin: TeXViewMargin.all(7),
+  padding: TeXViewPadding.all(2),
+  borderRadius: TeXViewBorderRadius.all(10),
+  overflow: TeXViewOverflow.hidden,
+  border: TeXViewBorder.all(
+    TeXViewBorderDecoration(
+        borderColor: Colors.green,
+        borderStyle: TeXViewBorderStyle.solid,
+        borderWidth: 5),
+  ),
+);
+
 class QuizOption {
   final String id;
   final String option;
   TeXViewStyle? style;
 
-  QuizOption(this.id, this.option,
-      {this.style = const TeXViewStyle(
-        margin: TeXViewMargin.all(3),
-        padding: TeXViewPadding.all(3),
-        borderRadius: TeXViewBorderRadius.all(10),
-        overflow: TeXViewOverflow.hidden,
-        border: TeXViewBorder.all(
-          TeXViewBorderDecoration(
-              borderColor: Colors.grey,
-              borderStyle: TeXViewBorderStyle.solid,
-              borderWidth: 2),
-        ),
-      )});
+  QuizOption(this.id, this.option, {this.style = quizItemStyleNormal});
 }
 
 class TeXViewQuizExample extends StatefulWidget {
@@ -43,7 +70,7 @@ class TeXViewQuizExample extends StatefulWidget {
 
 class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
   int currentQuizIndex = 0;
-  // String selectedId = "";
+  String currentSelectedId = "";
   bool isWrong = false;
 
   List<Quiz> quizList = [
@@ -116,19 +143,6 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
     ),
   ];
 
-  final TeXViewStyle _teXViewStyleNormal = const TeXViewStyle(
-    margin: TeXViewMargin.all(3),
-    padding: TeXViewPadding.all(3),
-    borderRadius: TeXViewBorderRadius.all(10),
-    overflow: TeXViewOverflow.hidden,
-    border: TeXViewBorder.all(
-      TeXViewBorderDecoration(
-          borderColor: Colors.grey,
-          borderStyle: TeXViewBorderStyle.solid,
-          borderWidth: 2),
-    ),
-  );
-
   final TeXViewStyle _teXViewStyleSelected = const TeXViewStyle(
     margin: TeXViewMargin.all(3),
     padding: TeXViewPadding.all(3),
@@ -179,11 +193,12 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                   style: option.style,
                   onTap: (id) {
                     setState(() {
+                      currentSelectedId = id;
                       isWrong = false;
                       quizList[currentQuizIndex].selectedOptionId = id;
 
                       for (var element in quizList[currentQuizIndex].options) {
-                        element.style = _teXViewStyleNormal;
+                        element.style = quizItemStyleNormal;
                       }
                       option.style = _teXViewStyleSelected;
                     });
@@ -238,6 +253,17 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                       }
                     } else {
                       isWrong = true;
+
+                      for (var element in quizList[currentQuizIndex].options) {
+                        if (element.id ==
+                            quizList[currentQuizIndex].correctOptionId) {
+                          element.style = quizItemStyleCorrect;
+                        }
+
+                        if (element.id == currentSelectedId) {
+                          element.style = quizItemStyleError;
+                        }
+                      }
                     }
                   });
                 },

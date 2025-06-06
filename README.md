@@ -194,11 +194,7 @@ Make sure to setup `TeXRederingServer` before rendering TeX:
 
 ```dart
 main() async {
-
-  if (!kIsWeb) {
-    await TeXRenderingServer.start();
-  }
-
+  await TeXRenderingServer.start();
   runApp(...);
 }
 ```

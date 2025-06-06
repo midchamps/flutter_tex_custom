@@ -1,3 +1,14 @@
+void main(List<String> args) {
+  final String latexString =
+      r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$.";
+
+  final List<TeXSegment> segments = parseTeX(latexString);
+
+  for (final TeXSegment segment in segments) {
+    print('Text: ${segment.text}, Type: ${segment.type}');
+  }
+}
+
 enum TeXSegmentType {
   text,
   inline,
@@ -13,6 +24,7 @@ class TeXSegment {
 
 enum TeXDelimiters {
   inlineBrackets(r"(\\\((.*?)\\\))"),
+  inlineDollar(r"(\$(.*?)\$)"),
   diplayBrackets(r"(\\\[(.*?)\\\])"),
   displayDollar(r"(\$\$(.*?)\$\$)");
 
@@ -21,25 +33,19 @@ enum TeXDelimiters {
   const TeXDelimiters(this.value);
 }
 
-List<TeXSegment> parseLatexString(String latexString) {
+List<TeXSegment> parseTeX(String latexString) {
   final List<TeXSegment> parsedTeXSegments = [];
 
-  // Regular expression to match LaTeX formulas
-  // The regex captures LaTeX formulas in the following groups:
-  // It captures the content within the delimiters.
-
-  // Group 2 will capture content of inline formulas \(content\)
-  // Group 4 will capture content of display formulas \[content\]
-  // Group 6 will capture content of display formulas $$content$$
-
   final RegExp latexRegex = RegExp(
-    r"(\\\((.*?)\\\))|(\\\[(.*?)\\\])|(\$\$(.*?)\$\$)",
+    "${TeXDelimiters.inlineBrackets.value}|"
+    "${TeXDelimiters.inlineDollar.value}|"
+    "${TeXDelimiters.diplayBrackets.value}|"
+    "${TeXDelimiters.displayDollar.value}",
   );
 
   int lastEnd = 0;
 
   for (final RegExpMatch match in latexRegex.allMatches(latexString)) {
-    // Add the text segment before the current LaTeX match
     if (match.start > lastEnd) {
       final String textSegment = latexString.substring(lastEnd, match.start);
       if (textSegment.isNotEmpty) {
@@ -47,37 +53,28 @@ List<TeXSegment> parseLatexString(String latexString) {
       }
     }
 
-    // Extract content from the matched LaTeX formula
+    final String inlineBracketContent = match.group(2) ?? "";
+    final String inlineDollarContent = match.group(4) ?? "";
+    final String displayBracketContent = match.group(6) ?? "";
+    final String displayDollarContent = match.group(8) ?? "";
 
-    // Group 2 will capture content of inline formulas \(content\)
-    // Group 4 will capture content of display formulas \[content\]
-    // Group 6 will capture content of display formulas $$content$$
-
-    final String? inlineContent = match.group(2);
-    final String? displayBracketContent = match.group(4);
-    final String? displayDollarContent = match.group(6);
-
-    if (inlineContent != null) {
-      final String formula = inlineContent;
-      if (formula.isNotEmpty) {
-        parsedTeXSegments.add(TeXSegment(formula, TeXSegmentType.inline));
-      }
-    } else if (displayBracketContent != null) {
-      final String formula = displayBracketContent;
-      if (formula.isNotEmpty) {
-        parsedTeXSegments.add(TeXSegment(formula, TeXSegmentType.display));
-      }
-    } else if (displayDollarContent != null) {
-      final String formula = displayDollarContent;
-      if (formula.isNotEmpty) {
-        parsedTeXSegments.add(TeXSegment(formula, TeXSegmentType.display));
-      }
+    if (inlineBracketContent.isNotEmpty) {
+      parsedTeXSegments
+          .add(TeXSegment(inlineBracketContent, TeXSegmentType.inline));
+    } else if (inlineDollarContent.isNotEmpty) {
+      parsedTeXSegments
+          .add(TeXSegment(inlineDollarContent, TeXSegmentType.inline));
+    } else if (displayBracketContent.isNotEmpty) {
+      parsedTeXSegments
+          .add(TeXSegment(displayBracketContent, TeXSegmentType.display));
+    } else if (displayDollarContent.isNotEmpty) {
+      parsedTeXSegments
+          .add(TeXSegment(displayDollarContent, TeXSegmentType.display));
     }
 
     lastEnd = match.end;
   }
 
-  // Add any remaining text after the last LaTeX match
   if (lastEnd < latexString.length) {
     final String trailingText = latexString.substring(lastEnd);
     if (trailingText.isNotEmpty) {

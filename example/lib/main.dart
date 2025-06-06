@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex_example/tex_view_document_example.dart';
@@ -10,9 +9,7 @@ import 'package:flutter_tex_example/tex_view_quiz_example.dart';
 import 'package:flutter_tex_example/tex2svg_example.dart';
 
 main() async {
-  if (!kIsWeb) {
-    await TeXRenderingServer.start();
-  }
+  await TeXRenderingServer.start();
   runApp(const FlutterTeXExample());
 }
 
