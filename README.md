@@ -75,7 +75,7 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.0.9
+  flutter_tex: ^5.1.0
 ``` 
 
 **2:** You can install packages from the command line:

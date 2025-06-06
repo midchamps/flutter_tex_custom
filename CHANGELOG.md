@@ -1,3 +1,6 @@
+## [5.1.0] - June 06, 2025
+* `TeXWidget` added, see [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
+
 ## [5.0.9] - June 05, 2025
 * `TeXViewGroup` and `TeXViewGroupItem` have been deprecated see the [Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
 
