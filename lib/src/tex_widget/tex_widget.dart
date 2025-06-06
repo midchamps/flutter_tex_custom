@@ -23,6 +23,8 @@ class TeXWidget extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: _buildChildren(segments),
     );
   }
@@ -57,7 +59,6 @@ class TeXWidget extends StatelessWidget {
             WidgetSpan(
               alignment: PlaceholderAlignment.middle,
               child: TeX2SVG(
-              
                 math: segment.text,
                 // You might want to pass the font size to the SVG renderer
                 // to ensure the formula size matches the text.
@@ -72,14 +73,11 @@ class TeXWidget extends StatelessWidget {
 
           // 2. Then, render the display formula as a new block widget.
           columnChildren.add(
-            Padding(
-              padding: displayFormulaPadding,
-              child: Center(
-                child: TeX2SVG(
-                  math: segment.text,
-                  // You might want a larger font size for display formulas.
-                  // fontSize: (textStyle.fontSize ?? 16) * 1.2,
-                ),
+            Center(
+              child: TeX2SVG(
+                math: segment.text,
+                // You might want a larger font size for display formulas.
+                // fontSize: (textStyle.fontSize ?? 16) * 1.2,
               ),
             ),
           );

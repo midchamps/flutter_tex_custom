@@ -13,7 +13,8 @@ class TeXWidgetExamples extends StatelessWidget {
       ),
       body: TeXWidget(
           math:
-              r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$."),
+              r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$."
+              "\n\n\n\n\n dkfjdkfj"),
     );
   }
 }

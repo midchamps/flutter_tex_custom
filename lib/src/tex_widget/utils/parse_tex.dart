@@ -1,14 +1,3 @@
-// void main(List<String> args) {
-//   final String latexString =
-//       r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$ and $$double dollar formula$$.";
-
-//   final List<TeXSegment> segments = parseTeX(latexString);
-
-//   for (final TeXSegment segment in segments) {
-//     print('Text: ${segment.text}, Type: ${segment.type}');
-//   }
-// }
-
 enum TeXSegmentType {
   text,
   inline,
