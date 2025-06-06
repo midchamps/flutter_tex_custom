@@ -8,4 +8,4 @@ window.MathJax = {
     }
 };
 
-console.log('MathJax configuration loaded');
+console.log('MathJax configuration loaded...!');

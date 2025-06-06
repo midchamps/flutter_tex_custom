@@ -1,3 +1,6 @@
+## [5.1.1] - June 06, 2025
+* MathJax custom config problems fixed for web.
+
 ## [5.1.0] - June 06, 2025
 * `TeXWidget` added, see [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
 
