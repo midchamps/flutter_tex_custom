@@ -26,7 +26,7 @@ class TeXView extends StatefulWidget {
   const TeXView({
     super.key,
     required this.child,
-    this.fonts,
+    @Deprecated('See docs to use custom fonts.') this.fonts,
     this.style,
     this.heightOffset = 5.0,
     this.loadingWidgetBuilder,

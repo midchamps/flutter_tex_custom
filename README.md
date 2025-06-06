@@ -23,6 +23,7 @@
     - [TeXView](#texview)
 - [More Examples](#more-examples)
 - [MathJax Configurations for `TeXView`](#mathjax-configurations-for-texview)
+- [Custom Fonts](#custom-fonts)
 - [API Usage (TeXView)](#api-usage-texview)
 - [API Changes](#api-changes)
 - [Limitations](#limitations)
@@ -374,10 +375,7 @@ TeXView(
 
 
 # MathJax Configurations for `TeXView`
-
-To apply a custom MathJax configuration, create a file named `mathjax_config.js` in the root of your project's `assets` directory.
-
-For example, your project structure should look like this:
+To apply a custom MathJax configuration, create a file named `mathjax_config.js` in the root of your project's `assets` directory, your project structure should look like this:
 
 ```text
 your_flutter_app/
@@ -410,6 +408,42 @@ window.MathJax = {
 ```
 
 For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/latest/basic/mathjax.html)
+
+# Custom Fonts
+To use custom fonts for `TeXView`, create a create a file named `flutter_tex.css` in the root of your project's `assets` directory, this style file should define your custom fonts. Your project structure should look like this:
+
+```textyour_flutter_app/
+├── assets/
+│   └── flutter_tex.css
+├── lib/
+...
+```
+and make sure to add this into `pubspec.yaml` like:
+```yaml
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/flutter_tex.css
+```
+
+An example `flutter_tex.css` file defining a custom font:
+
+```css
+@font-face {
+    font-family: 'army';
+    src: url("fonts/Army.ttf");
+}
+```
+Then you can use this custom font in your `TeXViewStyle` like this:
+
+```dart
+TeXViewStyle(
+  fontStyle: TeXViewFontStyle(
+      fontFamily: 'army'),
+)
+```
+
+
 
 # API Usage (TeXView)
 - `children` A list of `TeXViewWidget`

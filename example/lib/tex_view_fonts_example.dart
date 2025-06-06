@@ -12,22 +12,6 @@ class TeXViewFontsExamples extends StatelessWidget {
         title: const Text("TeXView Fonts"),
       ),
       body: TeXView(
-          fonts: const [
-            TeXViewFont(fontFamily: 'army', src: 'assets/fonts/Army.ttf'),
-            TeXViewFont(fontFamily: 'budhrg', src: 'assets/fonts/Budhrg.ttf'),
-            TeXViewFont(fontFamily: 'celtg', src: 'assets/fonts/CELTG.ttf'),
-            TeXViewFont(fontFamily: 'hillock', src: 'assets/fonts/hillock.ttf'),
-            TeXViewFont(
-                fontFamily: 'intimacy', src: 'assets/fonts/intimacy.ttf'),
-            TeXViewFont(
-                fontFamily: 'sansation_light',
-                src: 'assets/fonts/SansationLight.ttf'),
-            TeXViewFont(
-                fontFamily: 'slenmini', src: 'assets/fonts/slenmini.ttf'),
-            TeXViewFont(
-                fontFamily: 'subaccuz_regular',
-                src: 'fonts/SubaccuzRegular.ttf'),
-          ],
           child: TeXViewColumn(children: [
             _teXViewWidget("Army", 'army'),
             _teXViewWidget("Budhrg", 'budhrg'),
@@ -67,13 +51,16 @@ class TeXViewFontsExamples extends StatelessWidget {
   static TeXViewWidget _teXViewWidget(String title, String fontFamily) {
     return TeXViewColumn(
         style: const TeXViewStyle(
-            margin: TeXViewMargin.all(5),
-            padding: TeXViewPadding.all(5),
-            borderRadius: TeXViewBorderRadius.all(10),
-            border: TeXViewBorder.all(TeXViewBorderDecoration(
+          margin: TeXViewMargin.all(5),
+          padding: TeXViewPadding.all(5),
+          borderRadius: TeXViewBorderRadius.all(10),
+          border: TeXViewBorder.all(
+            TeXViewBorderDecoration(
                 borderWidth: 2,
                 borderStyle: TeXViewBorderStyle.groove,
-                borderColor: Colors.green))),
+                borderColor: Colors.green),
+          ),
+        ),
         children: [
           TeXViewDocument(title,
               style: TeXViewStyle(
