@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 void main(List<String> args) {
   final String latexString =
       r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$.";
@@ -5,7 +7,9 @@ void main(List<String> args) {
   final List<TeXSegment> segments = parseTeX(latexString);
 
   for (final TeXSegment segment in segments) {
-    print('Text: ${segment.text}, Type: ${segment.type}');
+    if (kDebugMode) {
+      print('Text: ${segment.text}, Type: ${segment.type}');
+    }
   }
 }
 

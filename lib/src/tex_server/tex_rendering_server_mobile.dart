@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -76,10 +77,13 @@ class TeXRenderingController {
         },
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.transparent)
       ..loadRequest(Uri.parse(
         baseUrl,
       ));
+
+    if (!Platform.isMacOS) {
+      webViewControllerPlus.setBackgroundColor(Colors.transparent);
+    }
 
     return controllerCompleter.future;
   }
