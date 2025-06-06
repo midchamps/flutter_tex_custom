@@ -7,6 +7,7 @@ import 'package:flutter_tex_example/tex_view_ink_well_example.dart';
 import 'package:flutter_tex_example/tex_view_markdown_example.dart';
 import 'package:flutter_tex_example/tex_view_quiz_example.dart';
 import 'package:flutter_tex_example/tex2svg_example.dart';
+import 'package:flutter_tex_example/tex_widget_example.dart';
 
 main() async {
   await TeXRenderingServer.start();
@@ -56,6 +57,8 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
             color: Colors.transparent,
           ),
           getExampleButton(context, 'TeX2SVG Example', const TeX2SVGExample()),
+          getExampleButton(
+              context, 'TeXWidget Example', const TeXWidgetExamples()),
           getExampleButton(
               context, 'TeX Examples', const TeXViewDocumentExamples()),
           getExampleButton(context, 'Quiz Example', const TeXViewQuizExample()),

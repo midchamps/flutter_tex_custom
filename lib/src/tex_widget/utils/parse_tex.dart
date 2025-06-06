@@ -1,17 +1,13 @@
-import 'package:flutter/foundation.dart';
+// void main(List<String> args) {
+//   final String latexString =
+//       r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$ and $$double dollar formula$$.";
 
-void main(List<String> args) {
-  final String latexString =
-      r"This is a test \(x^2 + y^2 = z^2\) and this is another test \[E = mc^2\] and $$a^2 + b^2 = c^2$$ and some text outside $last formular inline$.";
+//   final List<TeXSegment> segments = parseTeX(latexString);
 
-  final List<TeXSegment> segments = parseTeX(latexString);
-
-  for (final TeXSegment segment in segments) {
-    if (kDebugMode) {
-      print('Text: ${segment.text}, Type: ${segment.type}');
-    }
-  }
-}
+//   for (final TeXSegment segment in segments) {
+//     print('Text: ${segment.text}, Type: ${segment.type}');
+//   }
+// }
 
 enum TeXSegmentType {
   text,
@@ -26,6 +22,7 @@ class TeXSegment {
   TeXSegment(this.text, this.type);
 }
 
+// The order of these doesn't matter, but the order of their use in the RegExp does.
 enum TeXDelimiters {
   inlineBrackets(r"(\\\((.*?)\\\))"),
   inlineDollar(r"(\$(.*?)\$)"),
@@ -40,11 +37,9 @@ enum TeXDelimiters {
 List<TeXSegment> parseTeX(String latexString) {
   final List<TeXSegment> parsedTeXSegments = [];
 
+  // Corrected Order: More specific patterns (double delimiters) come first.
   final RegExp latexRegex = RegExp(
-    "${TeXDelimiters.inlineBrackets.value}|"
-    "${TeXDelimiters.inlineDollar.value}|"
-    "${TeXDelimiters.diplayBrackets.value}|"
-    "${TeXDelimiters.displayDollar.value}",
+    "${TeXDelimiters.displayDollar.value}|${TeXDelimiters.diplayBrackets.value}|${TeXDelimiters.inlineDollar.value}|${TeXDelimiters.inlineBrackets.value}",
   );
 
   int lastEnd = 0;
@@ -57,23 +52,26 @@ List<TeXSegment> parseTeX(String latexString) {
       }
     }
 
-    final String inlineBracketContent = match.group(2) ?? "";
-    final String inlineDollarContent = match.group(4) ?? "";
-    final String displayBracketContent = match.group(6) ?? "";
-    final String displayDollarContent = match.group(8) ?? "";
+    // Group indices are updated to match the new RegExp order.
+    // displayDollar is now group 2, displayBrackets group 4, etc.
+    final String displayDollarContent = match.group(2) ?? "";
+    final String displayBracketContent = match.group(4) ?? "";
+    final String inlineDollarContent = match.group(6) ?? "";
+    final String inlineBracketContent = match.group(8) ?? "";
 
-    if (inlineBracketContent.isNotEmpty) {
+    // The order of these checks is also updated for clarity.
+    if (displayDollarContent.isNotEmpty) {
       parsedTeXSegments
-          .add(TeXSegment(inlineBracketContent, TeXSegmentType.inline));
-    } else if (inlineDollarContent.isNotEmpty) {
-      parsedTeXSegments
-          .add(TeXSegment(inlineDollarContent, TeXSegmentType.inline));
+          .add(TeXSegment(displayDollarContent, TeXSegmentType.display));
     } else if (displayBracketContent.isNotEmpty) {
       parsedTeXSegments
           .add(TeXSegment(displayBracketContent, TeXSegmentType.display));
-    } else if (displayDollarContent.isNotEmpty) {
+    } else if (inlineDollarContent.isNotEmpty) {
       parsedTeXSegments
-          .add(TeXSegment(displayDollarContent, TeXSegmentType.display));
+          .add(TeXSegment(inlineDollarContent, TeXSegmentType.inline));
+    } else if (inlineBracketContent.isNotEmpty) {
+      parsedTeXSegments
+          .add(TeXSegment(inlineBracketContent, TeXSegmentType.inline));
     }
 
     lastEnd = match.end;
