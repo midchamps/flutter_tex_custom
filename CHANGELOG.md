@@ -1,3 +1,6 @@
+## [5.1.2] - June 06, 2025
+* Custom fonts problems fixed for web.
+
 ## [5.1.1] - June 06, 2025
 * MathJax custom config problems fixed for web.
 

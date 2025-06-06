@@ -76,7 +76,7 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.1.1
+  flutter_tex: ^5.1.2
 ``` 
 
 **2:** You can install packages from the command line:
@@ -414,6 +414,7 @@ To use custom fonts for `TeXView`, create a create a file named `flutter_tex.css
 
 ```textyour_flutter_app/
 ├── assets/
+│   ├── fonts/
 │   └── flutter_tex.css
 ├── lib/
 ...
