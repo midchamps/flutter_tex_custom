@@ -18,13 +18,14 @@
     - [Web](#web)
     - [MacOS](#macos)
 - [How to use?](#how-to-use)
+    - [TeXWidget](#texwidget)
     - [TeX2SVG](#tex2svg)
     - [TeXView](#texview)
-- [MathJax Configurations](#mathjax-configurations)
 - [More Examples](#more-examples)
-- [Api Changes](#api-changes)
-- [Api Usage (TeXView)](#api-usage-texview)
-- [Limitations:](#limitations)
+- [MathJax Configurations for `TeXView`](#mathjax-configurations-for-texview)
+- [API Usage (TeXView)](#api-usage-texview)
+- [API Changes](#api-changes)
+- [Limitations](#limitations)
 
 # About
 A self-contained Flutter package leveraging [MathJax](https://github.com/mathjax/MathJax) to deliver robust, fully offline rendering of mathematical and chemical notation. It parses multiple formats, including **LaTeX**, **TeX**, and **MathML**, making it a universal solution for in-app scientific and mathematical visualization.
@@ -160,8 +161,8 @@ For Web support modify `<project-directory>/web/index.html` like this.
 <head>
     ...
     ...
-  <script src="assets/packages/flutter_tex/core/mathjax_core.js"></script>
   <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
+  <script src="assets/packages/flutter_tex/core/mathjax_core.js"></script>
 </head>
 ```
 
@@ -190,8 +191,14 @@ main() async {
 }
 ```
 
-Now you can use `TeX2SVG` or `TeXView` as a widgets:
+Now you can use `TeXView`,`TeXWidget` or `TeX2SVG` as a widgets:
 
+### TeXWidget
+A simple but powerful widget based on `TeX2SVG`. See [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart) for more details:
+
+```dart
+TeXWidget(math: r"When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$")
+```
 
 
 ### TeX2SVG
@@ -347,7 +354,26 @@ TeXView(
    );
 ```
 
-# MathJax Configurations
+# More Examples
+
+- ### [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
+
+- ### [TeX2SVG Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex2svg_example.dart)
+
+- ### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
+
+- ### [TeXView Markdown Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
+
+- ### [TeXView Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
+
+- ### [TeXView Custom Fonts Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
+
+- ### [TeXView Image and Video Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
+
+- ### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
+
+
+# MathJax Configurations for `TeXView`
 
 To apply a custom MathJax configuration, create a file named `mathjax_config.js` in the root of your project's `assets` directory.
 
@@ -385,32 +411,11 @@ window.MathJax = {
 
 For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/latest/basic/mathjax.html)
 
-
-# More Examples
-
-- ### [TeX2SVG Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex2svg_example.dart)
-
-- ### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
-
-- ### [TeXView Markdown Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
-
-- ### [TeXView Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
-
-- ### [TeXView Custom Fonts Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
-
-- ### [TeXView Image and Video Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
-
-- ### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
-
-
-# Api Changes
-* Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
-
-# Api Usage (TeXView)
+# API Usage (TeXView)
 - `children` A list of `TeXViewWidget`
 - `heightOffset` Height offset to be added to the rendered height.
 
-- **`TeXViewWidget`**
+- **`TeXViewWidget`s**
     - `TeXViewDocument` Holds TeX data by using a raw string e.g. `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put HTML and Javascript code in it.
     - `TeXViewMarkdown` Holds markdown data.
     - `TeXViewContainer` Holds a single `TeXViewWidget` with styling.
@@ -429,7 +434,10 @@ For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/lat
 
 For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
-# Limitations:
+# API Changes
+* Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
+
+# Limitations
 To ensure your app remains fast and responsive, it is important to understand the performance implications of `TeXView`. As this widget utilizes [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus), each `TeXView` effectively embeds a web browser.
 
 Therefore, we advise against using multiple `TeXView` instances on a single page. For layouts requiring multiple TeX elements, please use the `TeXViewWidget` as a container. This approach is optimized for performance and is the preferred method for building complex views.

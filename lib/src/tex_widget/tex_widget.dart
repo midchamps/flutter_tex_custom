@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/tex2svg.dart';
 import 'package:flutter_tex/src/tex_widget/utils/parse_tex.dart';
 
 class TeXWidget extends StatelessWidget {
   final String math;
-  final TextStyle textStyle;
-  final EdgeInsets displayFormulaPadding;
+
+  final Widget Function(BuildContext context, String inlineFormula)?
+      inlineFormulaWidgetBuilder;
+  final Widget Function(BuildContext context, String displayFormula)?
+      displayFormulaWidgetBuilder;
+  final InlineSpan Function(BuildContext context, String text)?
+      textWidgetBuilder;
 
   const TeXWidget({
     super.key,
     required this.math,
-    this.textStyle = const TextStyle(fontSize: 16, color: Colors.black),
-    this.displayFormulaPadding = const EdgeInsets.symmetric(vertical: 8.0),
+    this.inlineFormulaWidgetBuilder,
+    this.displayFormulaWidgetBuilder,
+    this.textWidgetBuilder,
   });
 
   @override
@@ -25,11 +32,11 @@ class TeXWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: _buildChildren(segments),
+      children: _buildChildren(context, segments),
     );
   }
 
-  List<Widget> _buildChildren(List<TeXSegment> segments) {
+  List<Widget> _buildChildren(BuildContext context, List<TeXSegment> segments) {
     final List<Widget> columnChildren = [];
     final List<InlineSpan> currentRichTextSpans = [];
 
@@ -38,7 +45,6 @@ class TeXWidget extends StatelessWidget {
         columnChildren.add(
           RichText(
             text: TextSpan(
-              style: textStyle,
               children: List.of(currentRichTextSpans),
             ),
           ),
@@ -50,42 +56,46 @@ class TeXWidget extends StatelessWidget {
     for (final segment in segments) {
       switch (segment.type) {
         case TeXSegmentType.text:
-          currentRichTextSpans.add(
-            TextSpan(text: segment.text),
-          );
+          currentRichTextSpans
+              .add(textWidgetBuilder?.call(context, segment.text) ??
+                  TextSpan(
+                      text: segment.text,
+                      style: TextStyle(
+                        color: Colors.black,
+                      )));
           break;
         case TeXSegmentType.inline:
-          currentRichTextSpans.add(
-            WidgetSpan(
+          currentRichTextSpans.add(WidgetSpan(
               alignment: PlaceholderAlignment.middle,
-              child: TeX2SVG(
-                math: segment.text,
-                // You might want to pass the font size to the SVG renderer
-                // to ensure the formula size matches the text.
-                // fontSize: textStyle.fontSize,
-              ),
-            ),
-          );
+              child: inlineFormulaWidgetBuilder?.call(context, segment.text) ??
+                  TeX2SVG(
+                    math: segment.text,
+                  )));
           break;
         case TeXSegmentType.display:
-          // 1. First, render any preceding inline text/formulas.
           flushSpans();
 
-          // 2. Then, render the display formula as a new block widget.
-          columnChildren.add(
-            Center(
-              child: TeX2SVG(
-                math: segment.text,
-                // You might want a larger font size for display formulas.
-                // fontSize: (textStyle.fontSize ?? 16) * 1.2,
-              ),
-            ),
-          );
+          columnChildren
+              .add(displayFormulaWidgetBuilder?.call(context, segment.text) ??
+                  Center(
+                    child: TeX2SVG(
+                      math: segment.text,
+                      formulaWidgetBuilder: (context, svg) {
+                        double displayFontSize = 42;
+                        return SvgPicture.string(
+                          svg,
+                          height: displayFontSize,
+                          width: displayFontSize,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center,
+                        );
+                      },
+                    ),
+                  ));
           break;
       }
     }
 
-    // After the loop, flush any remaining spans.
     flushSpans();
 
     return columnChildren;

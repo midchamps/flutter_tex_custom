@@ -56,12 +56,12 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
             height: 30,
             color: Colors.transparent,
           ),
-          getExampleButton(context, 'TeX2SVG Example', const TeX2SVGExample()),
           getExampleButton(
               context, 'TeXWidget Example', const TeXWidgetExamples()),
           getExampleButton(
               context, 'TeX Examples', const TeXViewDocumentExamples()),
           getExampleButton(context, 'Quiz Example', const TeXViewQuizExample()),
+          getExampleButton(context, 'TeX2SVG Example', const TeX2SVGExample()),
           getExampleButton(
               context, 'Markdown Examples', const TeXViewMarkdownExamples()),
           getExampleButton(
