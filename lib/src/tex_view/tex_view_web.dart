@@ -13,10 +13,11 @@ external set onTeXViewRenderedCallback(JSFunction callback);
 external set onTapCallback(JSFunction callback);
 
 @JS('initTeXViewWeb')
-external void initTeXViewWeb(Window ifrm, String rawData);
+external void initTeXViewWeb(
+    Window iframeContentWindow, String iframId, String flutterTeXData);
 
 class TeXViewState extends State<TeXView> {
-  final String _viewId = UniqueKey().toString();
+  final String _iframeId = UniqueKey().toString();
   final HTMLIFrameElement iframeElement = HTMLIFrameElement()
     ..src = "assets/packages/flutter_tex/core/flutter_tex.html"
     ..style.height = '100%'
@@ -28,18 +29,18 @@ class TeXViewState extends State<TeXView> {
   String _lastRawData = '';
   bool _isReady = false;
 
-  late final Window _iframeWindow;
+  late final Window _iframeContentWindow;
 
   @override
   void initState() {
     iframeElement.onLoad.listen((_) {
-      _iframeWindow = iframeElement.contentWindow!;
+      _iframeContentWindow = iframeElement.contentWindow!;
       _isReady = true;
       _renderTeXView();
     });
 
     platformViewRegistry.registerViewFactory(
-        _viewId, (int id) => iframeElement..id = _viewId);
+        _iframeId, (int id) => iframeElement..id = _iframeId);
     onTeXViewRenderedCallback = onTeXViewRendered.toJS;
     onTapCallback = onTap.toJS;
     _renderTeXView();
@@ -55,16 +56,18 @@ class TeXViewState extends State<TeXView> {
           return SizedBox(
             height: snap.hasData ? snap.data! : initialHeight,
             child: HtmlElementView(
-              key: widget.key ?? ValueKey(_viewId),
-              viewType: _viewId,
+              key: widget.key ?? ValueKey(_iframeId),
+              viewType: _iframeId,
             ),
           );
         });
   }
 
-  void onTap(JSString id) => widget.child.onTapCallback(id.toString());
+  void onTap(JSString tapId, JSString viewId) {
+    widget.child.onTapCallback(tapId.toString());
+  }
 
-  void onTeXViewRendered(JSNumber h) {
+  void onTeXViewRendered(JSNumber h, JSString viewId) {
     double height = double.parse(h.toString()) + widget.heightOffset;
 
     heightStreamController.add(height);
@@ -85,7 +88,7 @@ class TeXViewState extends State<TeXView> {
     }
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
-      initTeXViewWeb(_iframeWindow, currentRawData);
+      initTeXViewWeb(_iframeContentWindow, _iframeId, currentRawData);
       _lastRawData = currentRawData;
     }
   }
