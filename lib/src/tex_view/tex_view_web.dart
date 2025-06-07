@@ -28,7 +28,7 @@ class TeXViewState extends State<TeXView> {
 
   @override
   void initState() {
-    TeXViewWebManager.registerInstance(_iframeId, this);
+    TeXRenderingControllerWeb.registerInstance(_iframeId, this);
 
     iframeElement.onLoad.listen((_) {
       _iframeContentWindow = iframeElement.contentWindow!;
@@ -38,9 +38,7 @@ class TeXViewState extends State<TeXView> {
 
     platformViewRegistry.registerViewFactory(
         _iframeId, (int id) => iframeElement..id = _iframeId);
-    // onTeXViewRenderedCallback = onTeXViewRendered.toJS;
-    // onTapCallback = onTap.toJS;
-    _renderTeXView();
+
     super.initState();
   }
 
@@ -71,15 +69,6 @@ class TeXViewState extends State<TeXView> {
     widget.onRenderFinished?.call(height);
   }
 
-  @override
-  void dispose() {
-    if (mounted) {
-      heightStreamController.close();
-    }
-    TeXViewWebManager.unregisterInstance(_iframeId);
-    super.dispose();
-  }
-
   void _renderTeXView() {
     if (!_isReady) {
       return;
@@ -89,5 +78,14 @@ class TeXViewState extends State<TeXView> {
       initTeXViewWeb(_iframeContentWindow, _iframeId, currentRawData);
       _lastRawData = currentRawData;
     }
+  }
+
+  @override
+  void dispose() {
+    if (mounted) {
+      heightStreamController.close();
+    }
+    TeXRenderingControllerWeb.unregisterInstance(_iframeId);
+    super.dispose();
   }
 }

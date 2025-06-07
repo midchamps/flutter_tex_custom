@@ -76,7 +76,7 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.1.2
+  flutter_tex: ^5.1.3
 ``` 
 
 **2:** You can install packages from the command line:
@@ -216,9 +216,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 main() async {
-  if (!kIsWeb) {
-    await TeXRenderingServer.start();
-  }
+  await TeXRenderingServer.start();
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: TeX2SVGExample(),

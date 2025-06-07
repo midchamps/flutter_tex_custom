@@ -1,3 +1,6 @@
+## [5.1.3] - June 07, 2025
+* Multi TeXView issue resolved [#203](https://github.com/Shahxad-Akram/flutter_tex/issues/203).
+
 ## [5.1.2] - June 06, 2025
 * Custom fonts problems fixed for web.
 

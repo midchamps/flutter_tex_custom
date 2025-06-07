@@ -12,16 +12,16 @@ class TeXRenderingServer {
   static bool multiTeXView = false;
 
   static Future<void> start({int port = 0}) async {
-    TeXViewWebManager.initialize();
+    TeXRenderingControllerWeb.initialize();
   }
 
   static Future<void> stop() async {
-    TeXViewWebManager.dispose();
+    TeXRenderingControllerWeb.dispose();
   }
 }
 
 /// Manages the global callbacks and communication between JS and Dart.
-class TeXViewWebManager {
+class TeXRenderingControllerWeb {
   static bool _isInitialized = false;
 
   /// A map to hold references to the state of each TeXView instance.
@@ -37,7 +37,6 @@ class TeXViewWebManager {
     _instances.remove(viewId);
   }
 
-  /// Initializes the global JavaScript callbacks. Should only be called once.
   static void initialize() {
     if (_isInitialized) return;
 
