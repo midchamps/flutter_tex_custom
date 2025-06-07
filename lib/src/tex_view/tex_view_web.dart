@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:js_interop';
 import 'dart:ui_web';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Element;
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:web/web.dart';
@@ -13,7 +13,7 @@ external set onTeXViewRenderedCallback(JSFunction callback);
 external set onTapCallback(JSFunction callback);
 
 @JS('initTeXViewWeb')
-external void initTeXViewWeb(String viewId, String rawData);
+external void initTeXViewWeb(Window ifrm, String rawData);
 
 class TeXViewState extends State<TeXView> {
   final String _viewId = UniqueKey().toString();
@@ -28,13 +28,20 @@ class TeXViewState extends State<TeXView> {
   String _lastRawData = '';
   bool _isReady = false;
 
+  late final Window _iframeWindow;
+
   @override
   void initState() {
+    iframeElement.onLoad.listen((_) {
+      _iframeWindow = iframeElement.contentWindow!;
+      _isReady = true;
+      _renderTeXView();
+    });
+
     platformViewRegistry.registerViewFactory(
         _viewId, (int id) => iframeElement..id = _viewId);
     onTeXViewRenderedCallback = onTeXViewRendered.toJS;
     onTapCallback = onTap.toJS;
-    _isReady = true;
     _renderTeXView();
     super.initState();
   }
@@ -78,7 +85,7 @@ class TeXViewState extends State<TeXView> {
     }
     var currentRawData = getRawData(widget);
     if (currentRawData != _lastRawData) {
-      initTeXViewWeb(_viewId, currentRawData);
+      initTeXViewWeb(_iframeWindow, currentRawData);
       _lastRawData = currentRawData;
     }
   }
