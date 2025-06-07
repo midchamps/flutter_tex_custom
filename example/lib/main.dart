@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex_example/multiple_tex_view_example.dart';
 import 'package:flutter_tex_example/tex_view_document_example.dart';
 import 'package:flutter_tex_example/tex_view_fonts_example.dart';
 import 'package:flutter_tex_example/tex_view_image_video_example.dart';
@@ -62,6 +63,8 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
               context, 'TeX Examples', const TeXViewDocumentExamples()),
           getExampleButton(context, 'Quiz Example', const TeXViewQuizExample()),
           getExampleButton(context, 'TeX2SVG Example', const TeX2SVGExample()),
+          getExampleButton(
+              context, 'Multi TeXView Examples', const MultiTeXViewExample()),
           getExampleButton(
               context, 'Markdown Examples', const TeXViewMarkdownExamples()),
           getExampleButton(

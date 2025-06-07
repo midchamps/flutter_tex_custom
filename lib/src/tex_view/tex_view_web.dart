@@ -3,14 +3,9 @@ import 'dart:js_interop';
 import 'dart:ui_web';
 import 'package:flutter/material.dart' hide Element;
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/tex_server/tex_rendering_server_web.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:web/web.dart';
-
-@JS('OnTeXViewRenderedCallback')
-external set onTeXViewRenderedCallback(JSFunction callback);
-
-@JS('OnTapCallback')
-external set onTapCallback(JSFunction callback);
 
 @JS('initTeXViewWeb')
 external void initTeXViewWeb(
@@ -33,6 +28,8 @@ class TeXViewState extends State<TeXView> {
 
   @override
   void initState() {
+    TeXViewWebManager.registerInstance(_iframeId, this);
+
     iframeElement.onLoad.listen((_) {
       _iframeContentWindow = iframeElement.contentWindow!;
       _isReady = true;
@@ -41,8 +38,8 @@ class TeXViewState extends State<TeXView> {
 
     platformViewRegistry.registerViewFactory(
         _iframeId, (int id) => iframeElement..id = _iframeId);
-    onTeXViewRenderedCallback = onTeXViewRendered.toJS;
-    onTapCallback = onTap.toJS;
+    // onTeXViewRenderedCallback = onTeXViewRendered.toJS;
+    // onTapCallback = onTap.toJS;
     _renderTeXView();
     super.initState();
   }
@@ -79,6 +76,7 @@ class TeXViewState extends State<TeXView> {
     if (mounted) {
       heightStreamController.close();
     }
+    TeXViewWebManager.unregisterInstance(_iframeId);
     super.dispose();
   }
 

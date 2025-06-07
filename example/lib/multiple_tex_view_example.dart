@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
-class TeXViewInkWellExample extends StatefulWidget {
-  const TeXViewInkWellExample({super.key});
+class MultiTeXViewExample extends StatefulWidget {
+  const MultiTeXViewExample({super.key});
 
   @override
-  State<TeXViewInkWellExample> createState() => _TeXViewInkWellExampleState();
+  State<MultiTeXViewExample> createState() => _MultiTeXViewExampleState();
 }
 
-class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
+class _MultiTeXViewExampleState extends State<MultiTeXViewExample> {
   final TeXViewStyle _teXViewStyle = const TeXViewStyle(
     margin: TeXViewMargin.all(10),
     padding: TeXViewPadding.all(10),
@@ -23,15 +23,55 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
   );
 
   String tappedId = "No InkWell!!! Please Tap an InkWell";
+  String viewId = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TeXViewInkWell: You tapped: $tappedId"),
+        title: Text("TeXViewInkWell $viewId tapped: $tappedId"),
       ),
       body: ListView(
         children: [
+          TeXView(
+              child: TeXViewColumn(children: [
+                TeXViewInkWell(
+                    child: const TeXViewDocument(
+                        r"""<h2>\( \rm\\TeXViewInkWell\) 1 with ripple</h2>"""),
+                    style: _teXViewStyle,
+                    id: "inkwell_1",
+                    rippleEffect: true,
+                    onTap: (id) {
+                      setState(() {
+                        tappedId = id;
+                        viewId = "TeXView 1";
+                      });
+                    }),
+              ]),
+              style: const TeXViewStyle(
+                margin: TeXViewMargin.all(5),
+                padding: TeXViewPadding.all(10),
+                borderRadius: TeXViewBorderRadius.all(10),
+                overflow: TeXViewOverflow.visible,
+                border: TeXViewBorder.all(
+                  TeXViewBorderDecoration(
+                      borderColor: Colors.blue,
+                      borderStyle: TeXViewBorderStyle.solid,
+                      borderWidth: 5),
+                ),
+                backgroundColor: Colors.white,
+              ),
+              loadingWidgetBuilder: (context) => const Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text("Rendering...")
+                      ],
+                    ),
+                  )),
           TeXView(
               child: TeXViewColumn(children: [
                 TeXViewInkWell(
@@ -95,6 +135,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
   void tapCallbackHandler(String id) {
     setState(() {
       tappedId = id;
+      viewId = "TeXView 2";
     });
   }
 }

@@ -23,7 +23,7 @@
     - [TeXView](#texview)
 - [More Examples](#more-examples)
 - [MathJax Configurations for `TeXView`](#mathjax-configurations-for-texview)
-- [Custom Fonts](#custom-fonts)
+- [Custom Fonts (TeXView)](#custom-fonts-texview)
 - [API Usage (TeXView)](#api-usage-texview)
 - [API Changes](#api-changes)
 - [Limitations](#limitations)
@@ -409,7 +409,7 @@ window.MathJax = {
 
 For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/latest/basic/mathjax.html)
 
-# Custom Fonts
+# Custom Fonts (TeXView)
 To use custom fonts for `TeXView`, create a create a file named `flutter_tex.css` in the root of your project's `assets` directory, this style file should define your custom fonts. Your project structure should look like this:
 
 ```textyour_flutter_app/
