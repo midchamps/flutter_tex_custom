@@ -6,8 +6,8 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:web/web.dart';
 
-@JS('TeXViewRenderedCallback')
-external set teXViewRenderedCallback(JSFunction callback);
+@JS('OnTeXViewRenderedCallback')
+external set onTeXViewRenderedCallback(JSFunction callback);
 
 @JS('OnTapCallback')
 external set onTapCallback(JSFunction callback);
@@ -32,7 +32,7 @@ class TeXViewState extends State<TeXView> {
   void initState() {
     platformViewRegistry.registerViewFactory(
         _viewId, (int id) => iframeElement..id = _viewId);
-    teXViewRenderedCallback = onTeXViewRendered.toJS;
+    onTeXViewRenderedCallback = onTeXViewRendered.toJS;
     onTapCallback = onTap.toJS;
     _isReady = true;
     _renderTeXView();

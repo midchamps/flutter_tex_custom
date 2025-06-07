@@ -7,9 +7,8 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart'
     show WebViewWidget;
 
 class TeXViewState extends State<TeXView> {
-  late final TeXRenderingController teXRenderingController;
-
   final StreamController<double> heightStreamController = StreamController();
+  late final TeXRenderingController teXRenderingController;
 
   bool _isReady = false;
   double _teXViewHeight = initialHeight;

@@ -29,6 +29,8 @@ class TeXRenderingServer {
 
 class TeXRenderingController {
   final WebViewControllerPlus webViewControllerPlus = WebViewControllerPlus();
+  final String baseUrl =
+      "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html";
 
   RenderingControllerCallback? onPageFinishedCallback,
       onTapCallback,
@@ -37,9 +39,6 @@ class TeXRenderingController {
   Future<WebViewControllerPlus> initController() {
     var controllerCompleter = Completer<WebViewControllerPlus>();
 
-    var baseUrl =
-        "http://localhost:${TeXRenderingServer.port!}/packages/flutter_tex/core/flutter_tex.html";
-
     webViewControllerPlus
       ..addJavaScriptChannel(
         'OnTapCallback',
@@ -47,7 +46,7 @@ class TeXRenderingController {
             onTapCallback?.call(onTapCallbackMessage.message),
       )
       ..addJavaScriptChannel(
-        'TeXViewRenderedCallback',
+        'OnTeXViewRenderedCallback',
         onMessageReceived: (teXViewRenderedCallbackMessage) =>
             onTeXViewRenderedCallback
                 ?.call(teXViewRenderedCallbackMessage.message),
