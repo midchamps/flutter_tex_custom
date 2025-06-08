@@ -18,13 +18,12 @@ class TeXViewState extends State<TeXView> {
     ..style.height = '100%'
     ..style.width = '100%'
     ..style.border = '0';
-
   final StreamController<double> heightStreamController = StreamController();
+  late final Window _iframeContentWindow;
 
-  String _lastRawData = '';
+  String _oldRawData = '';
   bool _isReady = false;
 
-  late final Window _iframeContentWindow;
 
   @override
   void initState() {
@@ -58,11 +57,11 @@ class TeXViewState extends State<TeXView> {
         });
   }
 
-  void onTap(JSString tapId, JSString viewId) {
+  void onTap(JSString tapId) {
     widget.child.onTapCallback(tapId.toString());
   }
 
-  void onTeXViewRendered(JSNumber h, JSString viewId) {
+  void onTeXViewRendered(JSNumber h) {
     double height = double.parse(h.toString()) + widget.heightOffset;
 
     heightStreamController.add(height);
@@ -74,9 +73,9 @@ class TeXViewState extends State<TeXView> {
       return;
     }
     var currentRawData = getRawData(widget);
-    if (currentRawData != _lastRawData) {
+    if (currentRawData != _oldRawData) {
       initTeXViewWeb(_iframeContentWindow, _iframeId, currentRawData);
-      _lastRawData = currentRawData;
+      _oldRawData = currentRawData;
     }
   }
 

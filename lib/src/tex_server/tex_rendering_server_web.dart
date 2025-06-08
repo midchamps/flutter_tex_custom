@@ -56,14 +56,14 @@ class TeXRenderingControllerWeb {
   static void _onTeXViewRendered(JSNumber h, JSString iframeId) {
     final instance = _instances[iframeId.toDart];
     if (instance != null && instance.mounted) {
-      instance.onTeXViewRendered(h, iframeId);
+      instance.onTeXViewRendered(h);
     }
   }
 
   static void _onTap(JSString tapId, JSString iframeId) {
     final instance = _instances[iframeId.toDart];
     if (instance != null && instance.mounted) {
-      instance.onTap(tapId, iframeId);
+      instance.onTap(tapId);
     }
   }
 }

@@ -11,8 +11,7 @@ class TeXViewState extends State<TeXView> {
   late final TeXRenderingController teXRenderingController;
 
   bool _isReady = false;
-  double _teXViewHeight = initialHeight;
-  String _lastRawData = "";
+  String _oldRawData = "";
 
   @override
   void initState() {
@@ -47,7 +46,7 @@ class TeXViewState extends State<TeXView> {
         stream: heightStreamController.stream,
         builder: (context, snap) {
           if (snap.hasData && !snap.hasError) {
-            double height = snap.data ?? _teXViewHeight;
+            double height = snap.data ?? initialHeight;
             return SizedBox(
               height: height,
               child: WebViewWidget(
@@ -80,11 +79,11 @@ class TeXViewState extends State<TeXView> {
     }
 
     var currentRawData = getRawData(widget);
-    if (currentRawData != _lastRawData) {
-      if (widget.loadingWidgetBuilder != null) _teXViewHeight = initialHeight;
+
+    if (currentRawData != _oldRawData) {
       await teXRenderingController.webViewControllerPlus
           .runJavaScript('initTeXViewMobile($currentRawData);');
-      _lastRawData = currentRawData;
+      _oldRawData = currentRawData;
     }
   }
 }
