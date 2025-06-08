@@ -92,9 +92,7 @@ class FlutterTeXLiteDOM {
       default:
         return this.texInput;
     }
-
   }
-
 }
 
 const flutterTeXLiteDOM = new FlutterTeXLiteDOM();
