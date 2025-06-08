@@ -1,12 +1,7 @@
 import 'dart:js_interop';
 
 import 'package:flutter_tex/src/tex_view/tex_view_web.dart';
-
-@JS('OnTeXViewRenderedCallback')
-external set onTeXViewRenderedCallback(JSFunction callback);
-
-@JS('OnTapCallback')
-external set onTapCallback(JSFunction callback);
+import 'package:web/web.dart';
 
 class TeXRenderingServer {
   static bool multiTeXView = false;
@@ -19,6 +14,16 @@ class TeXRenderingServer {
     TeXRenderingControllerWeb.dispose();
   }
 }
+
+@JS('OnTeXViewRenderedCallback')
+external set onTeXViewRenderedCallback(JSFunction callback);
+
+@JS('OnTapCallback')
+external set onTapCallback(JSFunction callback);
+
+@JS('initTeXViewWeb')
+external void initTeXViewWeb(
+    Window iframeContentWindow, String iframId, String flutterTeXData);
 
 /// Manages the global callbacks and communication between JS and Dart.
 class TeXRenderingControllerWeb {

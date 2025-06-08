@@ -1,15 +1,11 @@
 import 'dart:async';
 import 'dart:js_interop';
 import 'dart:ui_web';
-import 'package:flutter/material.dart' hide Element;
+import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_server/tex_rendering_server_web.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:web/web.dart';
-
-@JS('initTeXViewWeb')
-external void initTeXViewWeb(
-    Window iframeContentWindow, String iframId, String flutterTeXData);
 
 class TeXViewState extends State<TeXView> {
   final String _iframeId = UniqueKey().toString();
@@ -23,7 +19,6 @@ class TeXViewState extends State<TeXView> {
 
   String _oldRawData = '';
   bool _isReady = false;
-
 
   @override
   void initState() {

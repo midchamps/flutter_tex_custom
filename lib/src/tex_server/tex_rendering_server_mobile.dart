@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-/// A rendering server for TeXView. This is backed by a [LocalhostServer] and a [WebViewControllerPlusPlus].
-/// Make sure to call [start] before using the [TeXRenderingServer].
 class TeXRenderingServer {
   static final LocalhostServer _server = LocalhostServer();
   static final TeXRenderingController teXRenderingController =
