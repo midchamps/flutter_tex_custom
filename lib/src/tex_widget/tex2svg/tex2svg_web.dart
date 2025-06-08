@@ -1,10 +1,7 @@
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/tex_server/tex_rendering_server_web.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/default_svg_widget.dart';
-
-@JS('flutterTeXLiteDOM.teX2SVG')
-external String teX2SVG(String math, String inputType);
 
 class TeX2SVGState extends State<TeX2SVG> {
   @override

@@ -22,9 +22,9 @@
     - [TeX2SVG](#tex2svg)
     - [TeXView](#texview)
 - [More Examples](#more-examples)
-- [MathJax Configurations for `TeXView`](#mathjax-configurations-for-texview)
-- [Custom Fonts (TeXView)](#custom-fonts-texview)
-- [API Usage (TeXView)](#api-usage-texview)
+- [MathJax Configurations - `TeXView`](#mathjax-configurations---texview)
+- [Custom Fonts - `TeXView`](#custom-fonts---texview)
+- [API Usage - `TeXView`](#api-usage---texview)
 - [API Changes](#api-changes)
 - [Limitations](#limitations)
 
@@ -76,7 +76,7 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.1.3
+  flutter_tex: ^5.1.4
 ``` 
 
 **2:** You can install packages from the command line:
@@ -372,7 +372,7 @@ TeXView(
 - ### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
 
 
-# MathJax Configurations for `TeXView`
+# MathJax Configurations - `TeXView`
 To apply a custom MathJax configuration, create a file named `mathjax_config.js` in the root of your project's `assets` directory, your project structure should look like this:
 
 ```text
@@ -407,7 +407,7 @@ window.MathJax = {
 
 For more info please refer to the [MathJax Docs](https://docs.mathjax.org/en/latest/basic/mathjax.html)
 
-# Custom Fonts (TeXView)
+# Custom Fonts - `TeXView`
 To use custom fonts for `TeXView`, create a create a file named `flutter_tex.css` in the root of your project's `assets` directory, this style file should define your custom fonts. Your project structure should look like this:
 
 ```textyour_flutter_app/
@@ -444,7 +444,7 @@ TeXViewStyle(
 
 
 
-# API Usage (TeXView)
+# API Usage - `TeXView`
 - `children` A list of `TeXViewWidget`
 - `heightOffset` Height offset to be added to the rendered height.
 
