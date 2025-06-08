@@ -25,6 +25,9 @@ external set onTapCallback(JSFunction callback);
 external void initTeXViewWeb(
     Window iframeContentWindow, String iframId, String flutterTeXData);
 
+@JS('flutterTeXLiteDOM.teX2SVG')
+external String teX2SVG(String math, String inputType);
+
 /// Manages the global callbacks and communication between JS and Dart.
 class TeXRenderingControllerWeb {
   static bool _isInitialized = false;

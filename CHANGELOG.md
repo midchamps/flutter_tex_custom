@@ -1,3 +1,6 @@
+## [5.1.4] - June 08, 2025
+* Minor fixes.
+
 ## [5.1.3] - June 07, 2025
 * Multi TeXView issue resolved [#203](https://github.com/Shahxad-Akram/flutter_tex/issues/203).
 
