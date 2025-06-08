@@ -1,3 +1,7 @@
+## [5.1.5] - June 08, 2025
+* Minor fixes.
+* MathJax custom config load file name changed to `flutter_tex.js`
+
 ## [5.1.4] - June 08, 2025
 * Minor fixes.
 
