@@ -373,12 +373,12 @@ TeXView(
 
 
 # MathJax Configurations - `TeXView`
-To apply a custom MathJax configuration, create a file named `mathjax_config.js` in the root of your project's `assets` directory, your project structure should look like this:
+To apply a custom MathJax configuration, create a file named `flutter_tex.js` in the root of your project's `assets` directory, your project structure should look like this:
 
 ```text
 your_flutter_app/
 ├── assets/
-│   └── mathjax_config.js
+│   └── flutter_tex.js
 ├── lib/
 ...
 ```
@@ -388,10 +388,10 @@ and make sure to add this into `pubspec.yaml` like:
 flutter:
   uses-material-design: true
   assets:
-    - assets/mathjax_config.js
+    - assets/flutter_tex.js
 ```
 
-An example `mathjax_config.js` file:
+An example `flutter_tex.js` file:
 
 ```js
 window.MathJax = {

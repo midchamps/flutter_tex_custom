@@ -27,5 +27,3 @@ flutter:
   assets:
     - assets/
     - assets/fonts/
-    - assets/mathjax_config.js
-    - assets/flutter_tex.css
