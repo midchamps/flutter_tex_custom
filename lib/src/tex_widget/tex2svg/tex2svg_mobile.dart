@@ -4,19 +4,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/tex_server/tex_rendering_server_mobile.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/default_svg_widget.dart';
 
 class TeX2SVGState extends State<TeX2SVG> {
-  final TeXRenderingController teXRenderingController =
-      TeXRenderingServer.teXRenderingController;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: teXRenderingController.webViewControllerPlus
-            .runJavaScriptReturningResult(
-                "flutterTeXLiteDOM.teX2SVG(${jsonEncode(widget.math)}, '${widget.teXInputType.value}');"),
+        future: TeXRenderingServer.teX2SVG(
+            math: widget.math, teXInputType: widget.teXInputType),
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
             try {

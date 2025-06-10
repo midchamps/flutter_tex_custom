@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
@@ -20,6 +22,13 @@ class TeXRenderingServer {
   static Future<void> start({int port = 0}) async {
     await _server.start(port: port);
     await teXRenderingController.initController();
+  }
+
+  static Future<Object> teX2SVG(
+      {required String math, required TeXInputType teXInputType}) {
+    return teXRenderingController.webViewControllerPlus
+        .runJavaScriptReturningResult(
+            "flutterTeXLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');");
   }
 
   static Future<void> stop() async {
