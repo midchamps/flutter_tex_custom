@@ -7,6 +7,7 @@ import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart'
     show WebViewWidget;
 
+/// A Webview based Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXViewState extends State<TeXView> {
   final StreamController<double> heightStreamController = StreamController();
   late final TeXRenderingController teXRenderingController;

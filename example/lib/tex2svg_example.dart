@@ -43,7 +43,7 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Quadratic Formula",
+                Text("TeX",
                     style: baseStyle.copyWith(
                       fontSize: fontSize * 1.5,
                       color: Colors.black,
@@ -104,18 +104,33 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Matrix",
+                Text("MathML",
                     style: baseStyle.copyWith(
                       fontSize: fontSize * 1.5,
                       color: Colors.black,
                     )),
                 TeX2SVG(
-                  math: r""" \begin{bmatrix}
-                              a & b \\
-                              c & d
-                            \end{bmatrix}""",
+                  math: r"""
+                            <math xmlns = "http://www.w3.org/1998/Math/MathML">
+                              <mrow>
+                                  <mrow>
+                                    <msup> <mi>x</mi> <mn>2</mn> </msup> <mo>+</mo>
+                                    <mrow>
+                                        <mn>4</mn>
+                                        <mo>⁢</mo>
+                                        <mi>x</mi>
+                                    </mrow>
+                                    <mo>+</mo>
+                                    <mn>4</mn>
+                                  </mrow>
+                                  
+                                  <mo>=</mo>
+                                  <mn>0</mn>
+                              </mrow>
+                            </math>""",
+                  teXInputType: TeXInputType.mathML,
                   formulaWidgetBuilder: (context, svg) {
-                    double displayFontSize = fontSize * 3;
+                    double displayFontSize = fontSize * 1.25;
                     return SvgPicture.string(
                       svg,
                       height: displayFontSize,
@@ -124,7 +139,42 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                       alignment: Alignment.center,
                     );
                   },
-                )
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            height: 20,
+            color: Colors.transparent,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red, width: 4),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("AsciiMath",
+                    style: baseStyle.copyWith(
+                      fontSize: fontSize * 1.5,
+                      color: Colors.black,
+                    )),
+                TeX2SVG(
+                  math: r"""sum_(i=1)^n i^3=((n(n+1))/2)^2""",
+                  teXInputType: TeXInputType.asciiMath,
+                  formulaWidgetBuilder: (context, svg) {
+                    double displayFontSize = fontSize * 5;
+                    return SvgPicture.string(
+                      svg,
+                      height: displayFontSize,
+                      width: displayFontSize,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.center,
+                    );
+                  },
+                ),
               ],
             ),
           ),

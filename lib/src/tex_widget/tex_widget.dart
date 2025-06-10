@@ -3,13 +3,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tex/src/tex_widget/tex2svg/tex2svg.dart';
 import 'package:flutter_tex/src/tex_widget/utils/parse_tex.dart';
 
+/// A widget to render TeX segments, which can be inline or display math.
+/// Currently, it only supports rendering TeX.
+
 class TeXWidget extends StatelessWidget {
+  /// A raw TeX string to be rendered.
   final String math;
 
+  /// Optional builder for inline formulas.
+  /// If not provided, it defaults to using [TeX2SVG] to render inline math.
   final Widget Function(BuildContext context, String inlineFormula)?
       inlineFormulaWidgetBuilder;
+
+  /// Optional builder for display formulas.
+  /// If not provided, it defaults to using [TeX2SVG] to render display math.
   final Widget Function(BuildContext context, String displayFormula)?
       displayFormulaWidgetBuilder;
+
+  /// Optional builder for text segments.
+  /// If not provided, it defaults to using a [TextSpan] with black color.
   final InlineSpan Function(BuildContext context, String text)?
       textWidgetBuilder;
 
