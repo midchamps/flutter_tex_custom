@@ -76,9 +76,17 @@ class FlutterTeXLiteDOM {
   }
 
   teX2SVG(math, inputType, options) {
-    return this.adapteor.innerHTML(mathjax.document('', {
-      InputJax: this.getInputType(inputType), OutputJax: this.outputJax
-    }).convert(math, options));
+
+    try {
+      return this.adapteor.innerHTML(mathjax.document('', {
+        InputJax: this.getInputType(inputType), OutputJax: this.outputJax
+      }).convert(math, options));
+    } catch (error) {
+      console.error('Error converting Math to SVG:', error);
+      return 'teX2SVG_Error: ' + error.message;
+    }
+
+
   }
 
   getInputType(input) {
