@@ -163,7 +163,7 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
                     )),
                 TeX2SVG(
                   math: r"""sum_(i=1)^n i^3=((n(n+1))/2)^2""",
-                  teXInputType: TeXInputType.mathML,
+                  teXInputType: TeXInputType.asciiMath,
                   formulaWidgetBuilder: (context, svg) {
                     double displayFontSize = fontSize * 5;
                     return SvgPicture.string(

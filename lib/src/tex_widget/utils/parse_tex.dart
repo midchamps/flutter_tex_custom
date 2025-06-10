@@ -1,8 +1,4 @@
-enum TeXSegmentType {
-  text,
-  inline,
-  display,
-}
+import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXSegment {
   final String text;
@@ -11,17 +7,6 @@ class TeXSegment {
   TeXSegment(this.text, this.type);
 }
 
-// The order of these doesn't matter, but the order of their use in the RegExp does.
-enum TeXDelimiters {
-  inlineBrackets(r"(\\\((.*?)\\\))"),
-  inlineDollar(r"(\$(.*?)\$)"),
-  diplayBrackets(r"(\\\[(.*?)\\\])"),
-  displayDollar(r"(\$\$(.*?)\$\$)");
-
-  final String value;
-
-  const TeXDelimiters(this.value);
-}
 
 List<TeXSegment> parseTeX(String latexString) {
   final List<TeXSegment> parsedTeXSegments = [];

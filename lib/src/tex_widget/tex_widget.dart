@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_tex/src/tex_widget/tex2svg/tex2svg.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_widget/utils/parse_tex.dart';
 
 /// A widget to render TeX segments, which can be inline or display math.

@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'dart:js_interop';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/tex_view_web.dart';
 import 'package:web/web.dart';
@@ -12,9 +12,17 @@ class TeXRenderingServer {
     TeXRenderingControllerWeb.initialize();
   }
 
-  static Future<Object> teX2SVG(
+  static Future<String> teX2SVG(
       {required String math, required TeXInputType teXInputType}) {
-    return Future.value(flutterTeXLiteDOMTeX2SVG(math, teXInputType.value));
+    try {
+      return Future<String>.value(
+          flutterTeXLiteDOMTeX2SVG(math, teXInputType.value));
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error in teX2SVG: $e');
+      }
+      return Future.error('Error rendering TeX: $e');
+    }
   }
 
   static Future<void> stop() async {

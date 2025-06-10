@@ -24,11 +24,23 @@ class TeXRenderingServer {
     await teXRenderingController.initController();
   }
 
-  static Future<Object> teX2SVG(
+  static Future<String> teX2SVG(
       {required String math, required TeXInputType teXInputType}) {
-    return teXRenderingController.webViewControllerPlus
-        .runJavaScriptReturningResult(
-            "flutterTeXLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');");
+    try {
+      return teXRenderingController.webViewControllerPlus
+          .runJavaScriptReturningResult(
+              "flutterTeXLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');")
+          .then((data) {
+        return Platform.isAndroid
+            ? jsonDecode(data.toString()).toString()
+            : data.toString();
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error in teX2SVG: $e');
+      }
+      return Future.error('Error rendering TeX: $e');
+    }
   }
 
   static Future<void> stop() async {
