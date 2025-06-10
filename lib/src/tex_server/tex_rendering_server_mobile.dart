@@ -31,9 +31,19 @@ class TeXRenderingServer {
           .runJavaScriptReturningResult(
               "flutterTeXLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');")
           .then((data) {
-        return Platform.isAndroid
-            ? jsonDecode(data.toString()).toString()
-            : data.toString();
+        if (math.trim().isNotEmpty && data.toString().isEmpty) {
+          return Future.error('TeX input cannot be empty');
+        }
+
+        if (Platform.isAndroid) {
+          if (data == "null") {
+            return Future.error('');
+          }
+
+          return jsonDecode(data.toString()).toString();
+        } else {
+          return data.toString();
+        }
       });
     } catch (e) {
       if (kDebugMode) {
