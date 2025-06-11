@@ -54,15 +54,15 @@ class TeXViewState extends State<TeXView>
         });
   }
 
-  void onTap(JSString tapId) {
-    widget.child.onTapCallback(tapId.toString());
-  }
+  void onTap(JSString tapId) => widget.child.onTapCallback(tapId.toString());
 
   void onTeXViewRendered(JSNumber h) {
     double height = double.parse(h.toString()) + widget.heightOffset;
 
-    heightStreamController.add(height);
-    widget.onRenderFinished?.call(height);
+    if (mounted) {
+      heightStreamController.add(height);
+      widget.onRenderFinished?.call(height);
+    }
   }
 
   void _renderTeXView() {
