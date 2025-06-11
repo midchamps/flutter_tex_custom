@@ -1,3 +1,7 @@
+## [5.1.7]
+* Performance improvements.
+* Tex2SVG: Trigger rendering in initState [#215](https://github.com/Shahxad-Akram/flutter_tex/pull/215) (Merged)
+
 ## [5.1.6]
 * Minor fixes.
 * Multiple TeXView issue resolved [#214](https://github.com/Shahxad-Akram/flutter_tex/issues/214)
