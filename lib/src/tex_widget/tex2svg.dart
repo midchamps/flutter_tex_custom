@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 ///A pure Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX.
-class TeX2SVG extends StatelessWidget {
+class TeX2SVG extends StatefulWidget {
   /// A raw LaTeX string to be rendered.
   final String math;
 
@@ -15,23 +15,42 @@ class TeX2SVG extends StatelessWidget {
   /// Show a loading widget before rendering completes.
   final Widget Function(BuildContext context)? loadingWidgetBuilder;
 
+  /// Show an error widget if rendering fails.
+  final WidgetBuilder? errorWidgetBuilder;
+
   const TeX2SVG({
     super.key,
     required this.math,
     this.teXInputType = TeXInputType.teX,
     this.loadingWidgetBuilder,
     this.formulaWidgetBuilder,
+    this.errorWidgetBuilder,
   });
+
+  @override
+  State<TeX2SVG> createState() => _TeX2SVGState();
+}
+
+class _TeX2SVGState extends State<TeX2SVG> {
+  late final Future<String> _texRenderingFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _texRenderingFuture = TeXRenderingServer.teX2SVG(
+      math: widget.math,
+      teXInputType: widget.teXInputType,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future:
-            TeXRenderingServer.teX2SVG(math: math, teXInputType: teXInputType),
+        future: _texRenderingFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData && !snapshot.hasError) {
             var svg = snapshot.data.toString();
-            return formulaWidgetBuilder?.call(context, svg) ??
+            return widget.formulaWidgetBuilder?.call(context, svg) ??
                 SvgPicture.string(
                   svg,
                   height: 16.0,
@@ -41,16 +60,15 @@ class TeX2SVG extends StatelessWidget {
                 );
           } else {
             if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'Error rendering TeX: ${snapshot.error}',
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
+              return widget.errorWidgetBuilder?.call(context) ??
+                  Text(
+                    'Error rendering TeX: ${snapshot.error}',
+                    style: const TextStyle(color: Colors.red),
+                  );
             }
-            return loadingWidgetBuilder?.call(context) ??
+            return widget.loadingWidgetBuilder?.call(context) ??
                 Text(
-                  math,
+                  widget.math,
                 );
           }
         });
