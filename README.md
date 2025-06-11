@@ -19,14 +19,13 @@
     - [MacOS](#macos)
 - [How to use?](#how-to-use)
     - [TeXWidget](#texwidget)
-    - [TeX2SVG](#tex2svg)
     - [TeXView](#texview)
+    - [TeX2SVG](#tex2svg)
 - [More Examples](#more-examples)
 - [MathJax Configurations - `TeXView`](#mathjax-configurations---texview)
 - [Custom Fonts - `TeXView`](#custom-fonts---texview)
 - [API Usage - `TeXView`](#api-usage---texview)
 - [API Changes](#api-changes)
-- [Limitations](#limitations)
 
 # About
 A self-contained Flutter package leveraging [MathJax](https://github.com/mathjax/MathJax) to deliver robust, fully offline rendering of mathematical and chemical notation. It parses multiple formats, including **LaTeX**, **TeX**, and **MathML**, making it a universal solution for in-app scientific and mathematical visualization.
@@ -195,12 +194,59 @@ main() async {
 Now you can use `TeXView`,`TeXWidget` or `TeX2SVG` as a widgets:
 
 ### TeXWidget
-A simple but powerful widget based on `TeX2SVG`. See [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart) for more details:
+A simple but a powerful pure Flutter widget based on `TeX2SVG`. See [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart) for more details:
 
 ```dart
 TeXWidget(math: r"When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$")
 ```
 
+
+### TeXView
+This is an advanced widget, based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus), engineered for a rich user experience. It excels at rendering complex mathematical equations and offers a flexible environment for dynamic content through its support for:
+
+- **Inline HTML:** Directly embed and render HTML content.
+- **JavaScript:** Execute custom scripts for interactive elements.
+- **Markdown:** Display text with Markdown formatting.
+
+> [!CAUTION]
+Avoid using multiple `TeXView` instances on a single page, It's based on a `webview` and it can lead to performance issues. Instead, use `TeXWidget` or `TeX2SVG` for multiple TeX elements.
+
+
+```dart
+TeXView(
+    child: TeXViewColumn(children: [
+      TeXViewInkWell(
+        id: "id_0",
+        child: TeXViewColumn(children: [
+          TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+              style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
+          TeXViewContainer(
+            child: TeXViewImage.network(
+                'https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(10),
+              borderRadius: TeXViewBorderRadius.all(20),
+            ),
+          ),
+          TeXViewDocument(r"""<p>                                
+                       When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                       $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+              style: TeXViewStyle.fromCSS(
+                  'padding: 15px; color: white; background: green'))
+        ]),
+      )
+    ]),
+    style: TeXViewStyle(
+      elevation: 10,
+      borderRadius: TeXViewBorderRadius.all(25),
+      border: TeXViewBorder.all(TeXViewBorderDecoration(
+          borderColor: Colors.blue,
+          borderStyle: TeXViewBorderStyle.solid,
+          borderWidth: 5)),
+      backgroundColor: Colors.white,
+    ),
+   );
+```
 
 ### TeX2SVG
 A high-performance, pure Flutter solution for displaying mathematical notations. It accurately parses TeX expressions and renders them as resolution-independent SVGs via the [flutter_svg](https://pub.dev/packages/flutter_svg) library.
@@ -309,52 +355,6 @@ class _TeX2SVGExampleState extends State<TeX2SVGExample> {
 }
 ```
 
-### TeXView
-This is an advanced widget based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus), engineered for a rich user experience. It excels at rendering complex mathematical equations and offers a flexible environment for dynamic content through its support for:
-
-- **Inline HTML:** Directly embed and render HTML content.
-- **JavaScript:** Execute custom scripts for interactive elements.
-- **Markdown:** Display text with Markdown formatting.
-
-**Important:** Don't use multiple `TeXView` instances on a single page, as it can lead to performance issues. Instead, use `TeXWidget` or `TeX2SVG` as a container for multiple TeX elements.
-
-
-```dart
-TeXView(
-    child: TeXViewColumn(children: [
-      TeXViewInkWell(
-        id: "id_0",
-        child: TeXViewColumn(children: [
-          TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-              style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
-          TeXViewContainer(
-            child: TeXViewImage.network(
-                'https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png'),
-            style: TeXViewStyle(
-              margin: TeXViewMargin.all(10),
-              borderRadius: TeXViewBorderRadius.all(20),
-            ),
-          ),
-          TeXViewDocument(r"""<p>                                
-                       When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                       $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-              style: TeXViewStyle.fromCSS(
-                  'padding: 15px; color: white; background: green'))
-        ]),
-      )
-    ]),
-    style: TeXViewStyle(
-      elevation: 10,
-      borderRadius: TeXViewBorderRadius.all(25),
-      border: TeXViewBorder.all(TeXViewBorderDecoration(
-          borderColor: Colors.blue,
-          borderStyle: TeXViewBorderStyle.solid,
-          borderWidth: 5)),
-      backgroundColor: Colors.white,
-    ),
-   );
-```
-
 # More Examples
 
 - ### [TeXWidget Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_widget_example.dart)
@@ -445,7 +445,6 @@ TeXViewStyle(
 ```
 
 
-
 # API Usage - `TeXView`
 - `children` A list of `TeXViewWidget`
 - `heightOffset` Height offset to be added to the rendered height.
@@ -471,10 +470,3 @@ For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/t
 
 # API Changes
 * Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
-
-# Limitations
-To ensure your app remains fast and responsive, it is important to understand the performance implications of `TeXView`. As this widget utilizes [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus), each `TeXView` effectively embeds a web browser.
-
-Therefore, we advise against using multiple `TeXView` instances on a single page. For layouts requiring multiple TeX elements, please use the `TeXViewWidget` as a container. This approach is optimized for performance and is the preferred method for building complex views.
-
-For practical examples, browse the [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example). If you run into problems, you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).
