@@ -29,7 +29,7 @@ class TeXRenderingServer {
     try {
       return teXRenderingController.webViewControllerPlus
           .runJavaScriptReturningResult(
-              "flutterTeXLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');")
+              "mathJaxLiteDOM.teX2SVG(${jsonEncode(math)}, '${teXInputType.value}');")
           .then((data) {
         if (math.trim().isNotEmpty && data.toString().isEmpty) {
           return Future.error('TeX input cannot be empty');

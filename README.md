@@ -76,7 +76,7 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^5.1.5
+  flutter_tex: ^5.1.6
 ``` 
 
 **2:** You can install packages from the command line:
@@ -315,6 +315,8 @@ This is an advanced widget based on [webview_flutter_plus](https://pub.dartlang.
 - **Inline HTML:** Directly embed and render HTML content.
 - **JavaScript:** Execute custom scripts for interactive elements.
 - **Markdown:** Display text with Markdown formatting.
+
+**Important:** Don't use multiple `TeXView` instances on a single page, as it can lead to performance issues. Instead, use `TeXWidget` or `TeX2SVG` as a container for multiple TeX elements.
 
 
 ```dart

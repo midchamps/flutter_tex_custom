@@ -16,7 +16,7 @@ class TeXRenderingServer {
       {required String math, required TeXInputType teXInputType}) {
     try {
       return Future<String>.value(
-          flutterTeXLiteDOMTeX2SVG(math, teXInputType.value));
+          mathJaxLiteDOMTeX2SVG(math, teXInputType.value));
     } catch (e) {
       if (kDebugMode) {
         print('Error in teX2SVG: $e');
@@ -40,8 +40,8 @@ external set onTapCallback(JSFunction callback);
 external void initTeXViewWeb(
     Window iframeContentWindow, String iframId, String flutterTeXData);
 
-@JS('flutterTeXLiteDOM.teX2SVG')
-external String flutterTeXLiteDOMTeX2SVG(String math, String inputType);
+@JS('mathJaxLiteDOM.teX2SVG')
+external String mathJaxLiteDOMTeX2SVG(String math, String inputType);
 
 /// Manages the global callbacks and communication between JS and Dart.
 class TeXRenderingControllerWeb {

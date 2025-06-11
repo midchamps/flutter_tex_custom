@@ -56,7 +56,7 @@ const { SVG } = require('mathjax-full/js/output/svg.js');
 const { AllPackages } = require('mathjax-full/js/input/tex/AllPackages.js');
 
 
-class FlutterTeXLiteDOM {
+class MathJaxLiteDOM {
 
   constructor() {
     this.adapteor = liteAdaptor();
@@ -95,7 +95,7 @@ class FlutterTeXLiteDOM {
   }
 }
 
-const flutterTeXLiteDOM = new FlutterTeXLiteDOM();
+const mathJaxLiteDOM = new MathJaxLiteDOM();
 
-module.exports = { flutterTeXLiteDOM };
+module.exports = { mathJaxLiteDOM: mathJaxLiteDOM };
 

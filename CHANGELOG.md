@@ -1,3 +1,7 @@
+## [5.1.6] - June 11, 2025
+* Minor fixes.
+* Multiple TeXView issue resolved [#214](https://github.com/Shahxad-Akram/flutter_tex/issues/214)
+
 ## [5.1.5] - June 08, 2025
 * Minor fixes.
 * MathJax custom config load file name changed to `flutter_tex.js`

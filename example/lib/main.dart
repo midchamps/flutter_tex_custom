@@ -10,7 +10,6 @@ import 'package:flutter_tex_example/tex2svg_example.dart';
 import 'package:flutter_tex_example/tex_widget_example.dart';
 
 main() async {
-  TeXRenderingServer.multiTeXView = true;
   await TeXRenderingServer.start();
   runApp(const FlutterTeXExample());
 }
