@@ -7,7 +7,6 @@ class TeXSegment {
   TeXSegment(this.text, this.type);
 }
 
-
 List<TeXSegment> parseTeX(String latexString) {
   final List<TeXSegment> parsedTeXSegments = [];
 
