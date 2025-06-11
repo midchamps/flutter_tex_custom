@@ -8,7 +8,8 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart'
     show WebViewWidget;
 
 /// A Webview based Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
-class TeXViewState extends State<TeXView> {
+class TeXViewState extends State<TeXView>
+    with AutomaticKeepAliveClientMixin<TeXView> {
   final StreamController<double> heightStreamController = StreamController();
   late final TeXRenderingController teXRenderingController;
 
@@ -34,8 +35,10 @@ class TeXViewState extends State<TeXView> {
 
     teXRenderingController.onTeXViewRenderedCallback = (h) async {
       double height = double.parse(h.toString()) + widget.heightOffset;
-      heightStreamController.add(height);
-      widget.onRenderFinished?.call(height);
+      if (mounted) {
+        heightStreamController.add(height);
+        widget.onRenderFinished?.call(height);
+      }
     };
 
     super.initState();
@@ -43,6 +46,7 @@ class TeXViewState extends State<TeXView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     _renderTeXView();
     return StreamBuilder<double>(
         stream: heightStreamController.stream,
@@ -88,4 +92,7 @@ class TeXViewState extends State<TeXView> {
       _oldRawData = currentRawData;
     }
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

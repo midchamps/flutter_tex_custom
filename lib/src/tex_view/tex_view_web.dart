@@ -7,7 +7,8 @@ import 'package:flutter_tex/src/tex_server/tex_rendering_server_web.dart';
 import 'package:flutter_tex/src/tex_view/tex_view.dart';
 import 'package:flutter_tex/src/tex_view/utils/core_utils.dart';
 
-class TeXViewState extends State<TeXView> {
+class TeXViewState extends State<TeXView>
+    with AutomaticKeepAliveClientMixin<TeXView> {
   final String _iframeId = UniqueKey().toString();
   final HTMLIFrameElement iframeElement = HTMLIFrameElement()
     ..src = "assets/packages/flutter_tex/core/flutter_tex.html"
@@ -38,6 +39,7 @@ class TeXViewState extends State<TeXView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     _renderTeXView();
     return StreamBuilder<double>(
         stream: heightStreamController.stream,
@@ -82,4 +84,7 @@ class TeXViewState extends State<TeXView> {
     TeXRenderingControllerWeb.unregisterInstance(_iframeId);
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
