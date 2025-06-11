@@ -23,11 +23,15 @@ class TeXView extends StatefulWidget {
   /// Callback when TEX rendering finishes.
   final Function(double height)? onRenderFinished;
 
+  /// Whether to keep the widget alive when it is not visible. Default is false.
+  final bool wantKeepAlive;
+
   const TeXView({
     super.key,
     required this.child,
     @Deprecated('See docs to use custom fonts.') this.fonts,
     this.style,
+    this.wantKeepAlive = false,
     this.heightOffset = 5.0,
     this.loadingWidgetBuilder,
     this.onRenderFinished,

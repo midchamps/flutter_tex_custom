@@ -10,17 +10,22 @@ class TeX2SVG extends StatefulWidget {
   final TeXInputType teXInputType;
 
   /// Show a loading widget before rendering completes.
-  final Widget Function(BuildContext context, String svg)? formulaWidgetBuilder;
+  final WidgetBuilder? loadingWidgetBuilder;
 
   /// Show a loading widget before rendering completes.
-  final Widget Function(BuildContext context)? loadingWidgetBuilder;
+  final Widget Function(BuildContext context, String svg)? formulaWidgetBuilder;
 
   /// Show an error widget if rendering fails.
-  final WidgetBuilder? errorWidgetBuilder;
+  final Widget Function(BuildContext context, Object? error)?
+      errorWidgetBuilder;
+
+  /// Whether to keep the widget alive when it is not visible. Default is false.
+  final bool wantKeepAlive;
 
   const TeX2SVG({
     super.key,
     required this.math,
+    this.wantKeepAlive = false,
     this.teXInputType = TeXInputType.teX,
     this.loadingWidgetBuilder,
     this.formulaWidgetBuilder,
@@ -31,7 +36,8 @@ class TeX2SVG extends StatefulWidget {
   State<TeX2SVG> createState() => _TeX2SVGState();
 }
 
-class _TeX2SVGState extends State<TeX2SVG> {
+class _TeX2SVGState extends State<TeX2SVG>
+    with AutomaticKeepAliveClientMixin<TeX2SVG> {
   late final Future<String> _texRenderingFuture;
 
   @override
@@ -45,6 +51,7 @@ class _TeX2SVGState extends State<TeX2SVG> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder(
         future: _texRenderingFuture,
         builder: (context, snapshot) {
@@ -60,7 +67,7 @@ class _TeX2SVGState extends State<TeX2SVG> {
                 );
           } else {
             if (snapshot.hasError) {
-              return widget.errorWidgetBuilder?.call(context) ??
+              return widget.errorWidgetBuilder?.call(context, snapshot.error) ??
                   Text(
                     'Error rendering TeX: ${snapshot.error}',
                     style: const TextStyle(color: Colors.red),
@@ -73,4 +80,7 @@ class _TeX2SVGState extends State<TeX2SVG> {
           }
         });
   }
+
+  @override
+  bool get wantKeepAlive => widget.wantKeepAlive;
 }

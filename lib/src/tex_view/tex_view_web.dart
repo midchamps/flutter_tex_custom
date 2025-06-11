@@ -86,5 +86,5 @@ class TeXViewState extends State<TeXView>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => widget.wantKeepAlive;
 }

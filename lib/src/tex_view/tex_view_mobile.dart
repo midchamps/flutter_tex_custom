@@ -30,6 +30,8 @@ class TeXViewState extends State<TeXView>
       _onControllerReady();
     }
 
+    super.initState();
+
     teXRenderingController.onTapCallback =
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
@@ -40,8 +42,6 @@ class TeXViewState extends State<TeXView>
         widget.onRenderFinished?.call(height);
       }
     };
-
-    super.initState();
   }
 
   @override
@@ -94,5 +94,5 @@ class TeXViewState extends State<TeXView>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => widget.wantKeepAlive;
 }
