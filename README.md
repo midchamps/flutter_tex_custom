@@ -1,7 +1,7 @@
 # flutter_tex
 [![GitHub stars](https://img.shields.io/github/stars/Shahxad-Akram/flutter_tex?style=social)](https://github.com/Shahxad-Akram/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
-<img src="https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
+<img src="logo.png" alt=""/>
 
 # Contents
 - [flutter\_tex](#flutter_tex)
