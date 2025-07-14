@@ -4,9 +4,6 @@ import 'package:flutter_tex/flutter_tex.dart';
 class TeXExample {
   static TeXViewWidget introduction =
       _teXViewWidget(r"""<h4>Flutter \( \rm\TeX \)</h4>""", r"""
-             
-      <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">Content</label>
-
       <p>Flutter $ \rm\TeX $ is a Flutter Package to render so many types of equations based on \( \rm\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
       """);

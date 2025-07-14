@@ -56,9 +56,11 @@ const TeXViewStyle quizItemStyleCorrect = TeXViewStyle(
 class QuizOption {
   final String id;
   final String option;
+  bool isSelected;
   TeXViewStyle? style;
 
-  QuizOption(this.id, this.option, {this.style = quizItemStyleNormal});
+  QuizOption(this.id, this.option,
+      {this.style = quizItemStyleNormal, this.isSelected = false});
 }
 
 class TeXViewQuizExample extends StatefulWidget {
@@ -152,9 +154,19 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
       TeXViewBorderDecoration(
           borderColor: Colors.blue,
           borderStyle: TeXViewBorderStyle.solid,
-          borderWidth: 4),
+          borderWidth: 1),
     ),
   );
+
+  String radioHtmlHelper(String label, bool isChecked) {
+    var checked = isChecked ? 'checked' : 'unchecked';
+
+    return r"""<input type="radio" """ +
+        checked +
+        r"""> <label""" +
+        label +
+        r"""</label>""";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +197,10 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                   rippleEffect: true,
                   id: option.id,
                   child: TeXViewDocument(
-                    option.option,
+                    radioHtmlHelper(
+                      option.option,
+                      option.isSelected,
+                    ),
                     style: const TeXViewStyle(
                       padding: TeXViewPadding.all(10),
                     ),
@@ -195,7 +210,15 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                     setState(() {
                       currentSelectedId = id;
                       isWrong = false;
+
                       quizList[currentQuizIndex].selectedOptionId = id;
+                      for (var element in quizList[currentQuizIndex].options) {
+                        if (element.id == id) {
+                          element.isSelected = true;
+                        } else {
+                          element.isSelected = false;
+                        }
+                      }
 
                       for (var element in quizList[currentQuizIndex].options) {
                         element.style = quizItemStyleNormal;
