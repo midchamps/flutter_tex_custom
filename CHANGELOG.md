@@ -1,3 +1,7 @@
+## [5.1.10]
+* [Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart) updated with radio buttons.
+
+
 ## [5.1.9]
 * [Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart) updated with radio buttons.
 
