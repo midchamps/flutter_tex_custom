@@ -13,8 +13,6 @@ export 'package:flutter_tex/src/tex_widget/tex2svg.dart';
 export 'package:flutter_tex/src/tex_view/widgets/column.dart';
 export 'package:flutter_tex/src/tex_view/widgets/container.dart';
 export 'package:flutter_tex/src/tex_view/widgets/document.dart';
-export 'package:flutter_tex/src/tex_view/widgets/group.dart';
-export 'package:flutter_tex/src/tex_view/widgets/group_item.dart';
 export 'package:flutter_tex/src/tex_view/widgets/image.dart';
 export 'package:flutter_tex/src/tex_view/widgets/ink_well.dart';
 export 'package:flutter_tex/src/tex_view/widgets/markdown.dart';

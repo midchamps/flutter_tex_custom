@@ -8,7 +8,7 @@ homepage: https://github.com/Shahxad-Akram/flutter_tex
 
 screenshots:
   - description: "Flutter TeX Logo"
-    path: https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png
+    path: logo.png
 
 environment:
   sdk: ">=3.2.3 <4.0.0"
