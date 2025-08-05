@@ -35,3 +35,46 @@ flutter:
     - packages/flutter_tex/core/flutter_tex.js
     - packages/flutter_tex/core/flutter_tex.css
     - packages/flutter_tex/core/flutter_tex.html
+
+  fonts:
+      - family: ABCMonumentGroteskSemi-Mono
+        fonts:
+            - asset: assets/fonts/ABCMonumentGroteskSemi-Mono/ABCMonumentGroteskSemi-Mono-Regular.otf
+      - family: DigitalClock # (DSEG font license under SIL OPEN FONT LICENSE Version 1.1)
+        fonts:
+            - asset: assets/fonts/DigitalClock/DigitalClock.ttf
+      - family: GraphicXCondensed
+        fonts:
+            - asset: assets/fonts/GraphikXCondensed/GraphikXCondensed-Bold.otf
+      - family: NanumMyeongjo 
+        fonts:
+            - asset: assets/fonts/NanumMyeongjo.ttf 
+      - family: KaTeX_Main
+        fonts:
+            - asset: assets/fonts/KaTeX_Main-Regular.ttf
+      - family: KaTeX_Main-Italic
+        fonts:
+            - asset: assets/fonts/KaTeX_Main-Italic.ttf
+      - family: Pretendard
+        fonts:
+            - asset: assets/fonts/PretendardKR/Pretendard-Thin.otf
+              weight: 100
+            - asset: assets/fonts/PretendardKR/Pretendard-ExtraLight.otf
+              weight: 200
+            - asset: assets/fonts/PretendardKR/Pretendard-Light.otf
+              weight: 300
+            - asset: assets/fonts/PretendardKR/Pretendard-Regular.otf
+              weight: 400
+            - asset: assets/fonts/PretendardKR/Pretendard-Medium.otf
+              weight: 500
+            - asset: assets/fonts/PretendardKR/Pretendard-SemiBold.otf
+              weight: 600
+            - asset: assets/fonts/PretendardKR/Pretendard-Bold.otf
+              weight: 700
+            - asset: assets/fonts/PretendardKR/Pretendard-ExtraBold.otf
+              weight: 800
+            - asset: assets/fonts/PretendardKR/Pretendard-Black.otf
+              weight: 900
+      - family: SidebarIcons
+        fonts:
+            - asset: assets/fonts/SidebarIcons.ttf

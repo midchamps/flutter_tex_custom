@@ -30,3 +30,581 @@
         opacity: 0;
     }
 }
+
+/* 배경*/
+.container {
+    /* width: 100%;
+  height: 80%; */
+    /* height: 100vh; */
+    /* padding: 100px; */
+    /* margin: 0 auto; */
+    /* padding: 7.14em;
+  background-color: #f4f4f4; */
+    /* justify-content: center; */
+    /* display: flex;
+  align-items: center; */
+}
+
+.content-question {
+    width: 27.14em;
+    background-color: #fff;
+}
+
+.content-question>img {
+    width: 20em;
+    margin: 1.71em auto 0 auto;
+    display: block;
+}
+
+/* 박스 디자인 */
+.content-box {
+    margin-top: 1em;
+    border: 1px solid #000;
+    padding: 0.57em 1em;
+    line-height: 185%;
+}
+
+.content-box img {
+    max-width: 25.14em;
+    margin: 0 auto;
+    display: block;
+}
+
+.content-box img.has-margin {
+    margin-top: 0.57em;
+}
+
+/* <보기> 박스 */
+.content-box-1 {
+    position: relative;
+    padding-top: 1.14em;
+    margin-top: 1.5em;
+}
+
+.content-box-1 .content-absolute {
+    word-spacing: 0;
+    position: absolute;
+    /*정가운데 위치*/
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+/* 한글 목록 스타일 (가) */
+.korean-list-upper ol {
+    list-style: none;
+    padding-left: 2.14em;
+}
+
+.korean-list-upper li {
+    margin-bottom: 0.71em;
+    padding-left: 0;
+}
+
+.korean-order-upper-50 ol {
+    display: flex;
+    gap: 0 2.86em;
+    flex-wrap: wrap;
+}
+
+.korean-order-upper-50 li {
+    width: 9.9em;
+}
+
+/* 한글 목록 스타일 ㄱ. */
+.korean-list-lower ol {
+    list-style: none;
+    padding-left: 1.79em;
+}
+
+.korean-list-lower li {
+    margin-bottom: 0.71em;
+    padding-left: -4px;
+}
+
+.korean-order-lower-50 ol {
+    display: flex;
+    gap: 0 2.86em;
+    flex-wrap: wrap;
+}
+
+.korean-order-lower-50 li {
+    width: 10.14em;
+}
+
+/* 답안 선택지 목록 */
+.choice-list ol {
+    list-style-type: none;
+    /* padding-left: 1.57em; */
+}
+
+.choice-order ol {
+    display: flex;
+    flex-wrap: wrap;
+    /* padding-left: 1.57em; */
+}
+
+.choice-box img {
+    max-width: 20em;
+}
+
+.korean-list-upper>ol>li:nth-child(1)::marker {
+    content: "(가) ";
+}
+
+.korean-list-upper>ol>li:nth-child(2)::marker {
+    content: "(나) ";
+}
+
+.korean-list-upper>ol>li:nth-child(3)::marker {
+    content: "(다) ";
+}
+
+.korean-list-upper>ol>li:nth-child(4)::marker {
+    content: "(라) ";
+}
+
+.korean-list-upper>ol>li:nth-child(5)::marker {
+    content: "(마) ";
+}
+
+.korean-list-upper>ol>li:nth-child(6)::marker {
+    content: "(바) ";
+}
+
+.korean-list-upper>ol>li:nth-child(7)::marker {
+    content: "(사) ";
+}
+
+.korean-list-upper>ol>li:nth-child(8)::marker {
+    content: "(아) ";
+}
+
+.korean-list-upper>ol>li:nth-child(9)::marker {
+    content: "(자) ";
+}
+
+.korean-list-upper>ol>li:nth-child(10)::marker {
+    content: "(차) ";
+}
+
+.korean-list-upper>ol>li:nth-child(11)::marker {
+    content: "(카) ";
+}
+
+.korean-list-upper>ol>li:nth-child(12)::marker {
+    content: "(타) ";
+}
+
+.korean-list-upper>ol>li:nth-child(13)::marker {
+    content: "(파) ";
+}
+
+.korean-list-upper>ol>li:nth-child(14)::marker {
+    content: "(하) ";
+}
+
+.korean-list-lower>ol>li:nth-child(1)::marker {
+    content: "ㄱ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(2)::marker {
+    content: "ㄴ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(3)::marker {
+    content: "ㄷ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(4)::marker {
+    content: "ㄹ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(5)::marker {
+    content: "ㅁ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(6)::marker {
+    content: "ㅂ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(7)::marker {
+    content: "ㅅ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(8)::marker {
+    content: "ㅇ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(9)::marker {
+    content: "ㅈ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(10)::marker {
+    content: "ㅊ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(11)::marker {
+    content: "ㅋ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(12)::marker {
+    content: "ㅌ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(13)::marker {
+    content: "ㅍ. ";
+}
+
+.korean-list-lower>ol>li:nth-child(14)::marker {
+    content: "ㅎ. ";
+}
+
+/* .choice-box > ol > li:nth-child(1)::marker {
+  content: "➀ ";
+}
+.choice-box > ol > li:nth-child(2)::marker {
+  content: "➁ ";
+}
+.choice-box > ol > li:nth-child(3)::marker {
+  content: "➂ ";
+}
+.choice-box > ol > li:nth-child(4)::marker {
+  content: "➃ ";
+}
+.choice-box > ol > li:nth-child(5)::marker {
+  content: "➄ ";
+} */
+
+.choice-image li {
+    vertical-align: top;
+}
+
+.choice-image li img {
+    vertical-align: top;
+}
+
+.choice-image li {
+    margin-bottom: 1.14em;
+}
+
+.choice-image-order ol {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.choice-image-order li {
+    width: 50%;
+}
+
+.choice-image-order li img {
+    max-width: 7.86em;
+}
+
+/*---------------수정해도 되는곳-------------------*/
+/* 전체 설정 */
+.content-question {
+    font-size: 14px;
+    font-family: "PretendardKR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-weight: 400;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+}
+
+/* 기본 body 스타일 */
+body {
+    font-family: "PretendardKR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-weight: 400;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    margin: 0;
+    padding: 0;
+}
+
+/* 제목에는 명조체 사용 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* 강조 텍스트 */
+strong,
+b {
+    font-weight: 700;
+}
+
+/* 기울임 텍스트 */
+em,
+i {
+    font-style: italic;
+}
+
+/* 한글 폰트 설정 */
+.nanum-myeongjo-regular {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    word-spacing: 0.21875em;
+    transform: scaleX(1);
+}
+
+.nanum-myeongjo-bold {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    word-spacing: 0.21875em;
+    transform: scaleX(1);
+}
+
+/* 현대적인 한글 폰트 */
+.pretendard-regular {
+    font-family: "PretendardKR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    word-spacing: 0.21875em;
+}
+
+.pretendard-medium {
+    font-family: "PretendardKR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    word-spacing: 0.21875em;
+}
+
+.pretendard-bold {
+    font-family: "PretendardKR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 185%;
+    letter-spacing: -0.02em;
+    word-spacing: 0.21875em;
+}
+
+/* 수학 수식용 폰트 */
+.katex-main-regular {
+    font-family: "KaTeX_Main", "Times New Roman", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.katex-main-italic {
+    font-family: "KaTeX_Main", "Times New Roman", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* KaTeX 수식 크기 조절 */
+.katex {
+    font-size: 1.045em !important;
+    line-height: 185%;
+    margin-right: 0.2em;
+}
+
+.katex * {
+    color: #404040;
+}
+
+/* 디스플레이 모드 수식 크기 조절 */
+.katex-display {
+    font-size: 1.045em !important;
+}
+
+/* 분수 크기 조절 */
+/* .katex .mfrac {
+  font-size: 1.4em !important;
+} */
+/* 첨자 크기 조절 */
+.katex .script {
+    font-size: 0.7em !important;
+}
+
+/* 답안 선택지 목록 */
+.choice-box {
+    margin-top: 1em;
+    line-height: 185%;
+}
+
+/* 답안 목록 마커 크기 조절 ➀ */
+.choice-list li::marker {
+    font-size: 1.2em;
+}
+
+/* 답안 목록 줄 간격 */
+.choice-list li {
+    line-height: 185%;
+}
+
+/* 답안 선택지 목록 1줄에 배치 1x1x1x1..x1 */
+.choice-order-1 li {
+    word-break: break-all;
+    width: 20%;
+}
+
+/* 답안 선택지 목록 2줄에 배치 2x3 */
+.choice-order-2 li {
+    word-break: break-all;
+    width: 33%;
+}
+
+/* 답안 선택지 목록 3줄에 배치 2x2x1 */
+.choice-order-3 li {
+    word-break: break-all;
+    width: 50%;
+}
+
+/* 이미지 선택지 1줄짜리 줄간격 */
+.choice-image li {
+    margin-bottom: 1.14em;
+}
+
+.choice-box>ol>li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5em;
+}
+
+.choice-box>ol>li::before {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.choice-box>ol>li>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* span 태그도 중앙 정렬되도록 */
+.choice-box>ol>li>div>span {
+    display: flex;
+    align-items: center;
+}
+
+.choice-box>ol>li:nth-child(1)::before {
+    content: "①";
+}
+
+.choice-box>ol>li:nth-child(2)::before {
+    content: "②";
+}
+
+.choice-box>ol>li:nth-child(3)::before {
+    content: "③";
+}
+
+.choice-box>ol>li:nth-child(4)::before {
+    content: "④";
+}
+
+.choice-box>ol>li:nth-child(5)::before {
+    content: "⑤";
+}
+
+.choice-box>ol>li.correct_answer:nth-child(1)::before {
+    content: "❶ ";
+}
+
+.choice-box>ol>li.correct_answer:nth-child(2)::before {
+    content: "❷ ";
+}
+
+.choice-box>ol>li.correct_answer:nth-child(3)::before {
+    content: "❸ ";
+}
+
+.choice-box>ol>li.correct_answer:nth-child(4)::before {
+    content: "❹ ";
+}
+
+.choice-box>ol>li.correct_answer:nth-child(5)::before {
+    content: "❺ ";
+}
+
+@font-face {
+    font-family: "Nanum Myeongjo";
+    src: url("assets/fonts/NanumMyeongjo.ttf") format("truetype");
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nanum Myeongjo";
+    src: url("assets/fonts/NanumMyeongjo.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PretendardKR";
+    src: url("assets/fonts/PretendardKR/Pretendard-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PretendardKR";
+    src: url("assets/fonts/PretendardKR/Pretendard-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "PretendardKR";
+    src: url("assets/fonts/PretendardKR/Pretendard-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "KaTeX_Main";
+    src: url("assets/fonts/KaTeX_Main-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "KaTeX_Main";
+    src: url("assets/fonts/KaTeX_Main-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+.svg-container {
+    margin-top: 0.5em;
+}
+
+.svg-container>img {
+    margin: 0 auto;
+}
+
+.fraction-text {
+    line-height: 3.2;
+    vertical-align: center;
+    display: inline-block;
+}
