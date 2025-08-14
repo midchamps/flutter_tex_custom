@@ -11,6 +11,7 @@ export 'package:flutter_tex/src/tex_view/styles/overflow.dart';
 export 'package:flutter_tex/src/tex_view/tex_view.dart';
 export 'package:flutter_tex/src/tex_widget/tex2svg.dart';
 export 'package:flutter_tex/src/tex_view/widgets/column.dart';
+export 'package:flutter_tex/src/tex_view/widgets/row.dart';
 export 'package:flutter_tex/src/tex_view/widgets/container.dart';
 export 'package:flutter_tex/src/tex_view/widgets/document.dart';
 export 'package:flutter_tex/src/tex_view/widgets/image.dart';

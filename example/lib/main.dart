@@ -6,6 +6,8 @@ import 'package:flutter_tex_example/tex_view_image_video_example.dart';
 import 'package:flutter_tex_example/tex_view_ink_well_example.dart';
 import 'package:flutter_tex_example/tex_view_markdown_example.dart';
 import 'package:flutter_tex_example/tex_view_quiz_example.dart';
+import 'package:flutter_tex_example/tex_view_row_example.dart';
+import 'package:flutter_tex_example/tex_view_table_example.dart';
 import 'package:flutter_tex_example/tex2svg_example.dart';
 import 'package:flutter_tex_example/tex_widget_example.dart';
 
@@ -70,6 +72,10 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
               const TeXViewImageVideoExample()),
           getExampleButton(
               context, 'Inkwell Example', const TeXViewInkWellExample()),
+          getExampleButton(
+              context, 'Row Layout Example', const TeXViewRowExample()),
+          getExampleButton(
+              context, 'Math Formula Table', const TeXViewTableExample()),
         ],
       ),
     );

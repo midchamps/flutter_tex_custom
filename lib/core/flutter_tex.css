@@ -608,3 +608,18 @@ i {
     vertical-align: center;
     display: inline-block;
 }
+
+/* TeXViewRow 스타일 - 수평 배치 */
+.tex-view-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* TeXViewColumn 스타일 - 수직 배치 (기존에 없을 경우) */
+.tex-view-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
